@@ -30,6 +30,7 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
+extern void test_padding_space(void);
 
 
 //=======Test Reset Option=====
@@ -45,6 +46,7 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_SafeMalloc.c");
+  RUN_TEST(test_padding_space, 8);
 
   return (UnityEnd());
 }

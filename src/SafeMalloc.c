@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include "SafeMalloc.h"
 
-void SafeMalloc(){
-  
+padSpace *createPadding(){
+  padSpace space;
+  space.paddingSize = 50;
+  padSpace *padding = malloc(sizeof(space.paddingSize));
 }
+
