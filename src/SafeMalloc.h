@@ -1,7 +1,7 @@
 #ifndef SafeMalloc_H
 #define SafeMalloc_H
 
-typedef struct padSpace{
+typedef struct{
   int paddingSize;
 }padSpace;
 
