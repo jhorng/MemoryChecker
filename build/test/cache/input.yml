@@ -1,6 +1,6 @@
 ---
 :project:
-  :use_exceptions: false
+  :use_exceptions: true
   :use_mocks: true
   :compile_threads: 1
   :test_threads: 1
@@ -65,6 +65,7 @@
   :plugins:
   - :ignore
   - :callback
+  - :cexception
   :treat_as:
     uint8: HEX8
     uint16: HEX16

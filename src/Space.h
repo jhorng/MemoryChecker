@@ -5,6 +5,6 @@ typedef struct{
   int mallocSize;
 }Space;
 
-Space *createUserDefinedSpace(int mallocSize);
+Space *createUserDefinedSpace();
 
 #endif // Space_H

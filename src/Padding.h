@@ -5,6 +5,6 @@ typedef struct{
   int paddingSize;
 }padSpace;
 
-padSpace *createPadding();
+padSpace *createPadding(char check);
 
 #endif // Padding_H
