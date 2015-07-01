@@ -12,6 +12,6 @@ void tearDown(void){}
 
 void test(){
 
-  createUserDefinedSpace();
+  memorySpace();
 
 }
