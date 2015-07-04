@@ -49,8 +49,8 @@ void resetTest(void)
 //=======MAIN=====
 int main(void)
 {
-  UnityBegin("test_Space.c");
-  RUN_TEST(test, 8);
+  UnityBegin("test_Smalloc.c");
+  RUN_TEST(test, 12);
 
   return (UnityEnd());
 }

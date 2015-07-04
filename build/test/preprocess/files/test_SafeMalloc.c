@@ -1,4 +1,4 @@
-#include "Space.h"
+#include "SafeMalloc.h"
 #include "unity.h"
 
 
@@ -7,11 +7,3 @@ void setUp(void){}
 
 
 void tearDown(void){}
-
-
-
-void test(){
-
-  memorySpace();
-
-}

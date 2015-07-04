@@ -5,18 +5,21 @@
 #include "Smalloc.h"
 
 Space *memorySpace(){
-  Space *paddingPtr1, *paddingPtr2, spacePtr;
+  int i, length;
+  char insertion[4];
+  void *headerPtr, *footerPtr, *spacePtr;
   Space *space = malloc(sizeof(Space));
-  space->headerSize = space->footerSize = 3;
-  space->size = 9;
+  space->headerSize = space->footerSize = 100;
+  space->size = 500;
   
-  paddingPtr1 = space->headerSize;
-  // spacePtr = space->size;
-  // paddingPtr2 = space->footerSize;
+  headerPtr = space;
+  spacePtr = space + space->headerSize;
+  footerPtr = spacePtr + space->size;
   
-  // strcpy(space->headerSize, "52U");
-  // strcpy(space->footerSize, "52U");
-  // strcmp(space->headerSize, "52U");
-  // strcmp(space->footerSize, "52U");
+  strcpy(insertion, "0x54");
+  length = strlen(insertion);
+  for (i=0; i<(space->headerSize/length); i++){
+    headerPtr = footerPtr = insertion;
+  }
   
 }
