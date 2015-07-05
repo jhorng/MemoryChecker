@@ -4,7 +4,7 @@
 #include <string.h>
 #include "Smalloc.h"
 
-Space *memorySpace(){
+Space *createMemorySpace(){
   int i, length;
   char insertion[4];
   void *headerPtr, *footerPtr, *spacePtr;
@@ -21,5 +21,5 @@ Space *memorySpace(){
   for (i=0; i<(space->headerSize/length); i++){
     headerPtr = footerPtr = insertion;
   }
-  
 }
+

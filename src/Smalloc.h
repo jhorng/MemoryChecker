@@ -1,13 +1,12 @@
 #ifndef Smalloc_H
 #define Smalloc_H
 
-typedef struct Space_t Space;
-struct Space_t{
+typedef struct {
   int headerSize;
   int footerSize;
   int size;
-};
+} Space;
 
-Space *memorySpace();
+Space *createMemorySpace();
 
 #endif // Smalloc_H

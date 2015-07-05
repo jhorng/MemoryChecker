@@ -50,7 +50,7 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_Smalloc.c");
-  RUN_TEST(test, 12);
+  RUN_TEST(test, 10);
 
   return (UnityEnd());
 }
