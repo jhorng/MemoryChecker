@@ -1,11 +1,12 @@
 #ifndef Smalloc_H
 #define Smalloc_H
 
-#define safeMalloc(size) _safeMalloc(size,__LINE__,__FILE__)
+#define DATA_SIZE   100
+#define HEADER_SIZE 21
+#define FOOTER_SIZE 21
 
-#define DATA_SIZE     100
-#define HEADER_SIZE 	21
-#define FOOTER_SIZE 	21
+#define safeMalloc() _safeMalloc(__LINE__,__FILE__)
+
 
 typedef struct {
   int headerSize;

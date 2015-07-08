@@ -5,17 +5,17 @@
 #include "Smalloc.h"
 
 
-void *_safeMalloc(int size,int lineNumber, char *fileName){
-  void *headerPtr = HEADER_SIZE,
-       *dataPtr   = DATA_SIZE,
-       *footerPtr = FOOTER_SIZE;
+void *_safeMalloc(int lineNumber, char *fileName){
+  void *headerPtr,
+       *dataPtr,
+       *footerPtr;
        
        
   void *space = malloc(sizeof(HEADER_SIZE+DATA_SIZE+FOOTER_SIZE));
   
   headerPtr   = space;
-  dataPtr     = space+headerSize;
-  footerPtr   = dataPtr +dataSize;
+  dataPtr     = space+HEADER_SIZE;
+  footerPtr   = dataPtr +DATA_SIZE;
   
     
   printf("space:%p\n",space);
@@ -34,8 +34,9 @@ void *_safeMalloc(int size,int lineNumber, char *fileName){
  *  @arg pointer     The destination to point to
  */
 void patternRepeat(int timesToCopy, char *pattern, char *pointer) {
-  *pointer="xx";
-  printf("%x\n",*pointer);
+  strcpy(pointer,"y");
+ 
+  printf("%c%c\n",*pointer,*(pointer+1));
   
 }
 

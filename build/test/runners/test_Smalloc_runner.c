@@ -35,6 +35,7 @@ char* GlobalOrderError;
 extern void setUp(void);
 extern void tearDown(void);
 extern void test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory(void);
+extern void test_safeMalloc(void);
 
 
 //=======Test Reset Option=====
@@ -51,6 +52,7 @@ int main(void)
 {
   UnityBegin("test_Smalloc.c");
   RUN_TEST(test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory, 11);
+  RUN_TEST(test_safeMalloc, 18);
 
   return (UnityEnd());
 }
