@@ -11,8 +11,12 @@ void tearDown(void){}
 
 
 
-void test(){
+void test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory(){
 
-  createMemorySpace();
+  char *memory = malloc(20);
+
+  patternRepeat(1,"x",memory);
+
+  UnityAssertEqualNumber((_U_SINT)(_US32)(('x')), (_U_SINT)(_US32)((memory)), (((void *)0)), (_U_UINT)14, UNITY_DISPLAY_STYLE_HEX32);
 
 }

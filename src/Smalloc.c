@@ -4,22 +4,38 @@
 #include <string.h>
 #include "Smalloc.h"
 
-Space *createMemorySpace(){
-  int i, length;
-  char insertion[4];
-  void *headerPtr, *footerPtr, *spacePtr;
-  Space *space = malloc(sizeof(Space));
-  space->headerSize = space->footerSize = 100;
-  space->size = 500;
+
+void *_safeMalloc(int size,int lineNumber, char *fileName){
+  void *headerPtr = HEADER_SIZE,
+       *dataPtr   = DATA_SIZE,
+       *footerPtr = FOOTER_SIZE;
+       
+       
+  void *space = malloc(sizeof(HEADER_SIZE+DATA_SIZE+FOOTER_SIZE));
   
-  headerPtr = space;
-  spacePtr = space + space->headerSize;
-  footerPtr = spacePtr + space->size;
+  headerPtr   = space;
+  dataPtr     = space+headerSize;
+  footerPtr   = dataPtr +dataSize;
   
-  strcpy(insertion, "0x54");
-  length = strlen(insertion);
-  for (i=0; i<(space->headerSize/length); i++){
-    headerPtr = footerPtr = insertion;
-  }
+    
+  printf("space:%p\n",space);
+  printf("head :%p\n",headerPtr);
+  printf("data :%p\n",dataPtr);
+  printf("foot :%p\n",footerPtr);
+  
+  return;
+}
+
+
+/**
+ *  @brief Copy repetitive patterns into memory
+ *  @arg timesToCopy The number of times to copy
+ *  @arg pattern     The pattern to copy to the destination
+ *  @arg pointer     The destination to point to
+ */
+void patternRepeat(int timesToCopy, char *pattern, char *pointer) {
+  *pointer="xx";
+  printf("%x\n",*pointer);
+  
 }
 
