@@ -9,7 +9,7 @@
 :failures:
 - :test: test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory
   :line: 14
-  :message: Expected 0x00000079 Was 0x003F15B8
+  :message: Expected 0x00000079 Was 0x005F15B8
 :ignores: []
 :counts:
   :total: 2
@@ -19,8 +19,10 @@
 :stdout:
 - !binary |-
   eQA=
-- space:003F1608
-- head :003F1608
-- data :003F161D
-- foot :003F1681
+- space:005F1608
+- head :005F1608
+- data :005F161D
+- foot :005F1681
+- foot :20
+- foot :test/test_Smalloc.c
 - ''

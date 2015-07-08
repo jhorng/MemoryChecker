@@ -22,6 +22,8 @@ void *_safeMalloc(int lineNumber, char *fileName){
   printf("head :%p\n",headerPtr);
   printf("data :%p\n",dataPtr);
   printf("foot :%p\n",footerPtr);
+  printf("foot :%d\n",lineNumber);
+  printf("foot :%s\n",fileName);
   
   return;
 }
