@@ -4,22 +4,20 @@
 #include <string.h>
 #include "Smalloc.h"
 
-Space *createMemorySpace(){
-  int i, length;
-  char insertion[4];
-  void *headerPtr, *footerPtr, *spacePtr;
-  Space *space = malloc(sizeof(Space));
-  space->headerSize = space->footerSize = 100;
-  space->size = 500;
+void *_safeMalloc(int lineNumber, char fileName){
+  void *headerPtr,
+       *dataPtr,
+       *footerPtr;
+       
+       
+  void *space = malloc(sizeof(HEADER_SIZE+DATA_SIZE+FOOTER_SIZE));
   
-  headerPtr = space;
-  spacePtr = space + space->headerSize;
-  footerPtr = spacePtr + space->size;
+  headerPtr   = space;
+  dataPtr     = space+HEADER_SIZE;
+  footerPtr   = dataPtr +DATA_SIZE;
   
-  strcpy(insertion, "0x54");
-  length = strlen(insertion);
-  for (i=0; i<(space->headerSize/length); i++){
-    headerPtr = footerPtr = insertion;
-  }
+  printf("Line number: %d\n\n", lineNumber);
+  return;
 }
+
 

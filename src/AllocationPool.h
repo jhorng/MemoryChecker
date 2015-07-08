@@ -3,15 +3,23 @@
 
 #include "Smalloc.h"
 
-typedef struct allocation_t Allocation;
-struct allocation_t{
-  int lineNumber;
+typedef struct memoryDesciption_t memoryDesciption;
+struct memoryDesciption_t{
+  memoryDesciption *next;
+  int lineNo;
   int lengthOfSpace;
-  char fileName;
-  Space *memory;
-  Allocation *next;
+  char *fileName;
+  void *memory;
 };
 
-Allocation *createAllocationPool(int lineNumber, int lengthOfSpace, int fileName);
+typedef struct{
+  memoryDesciption *head;
+  memoryDesciption *tail;
+  int noOfLinkedDesc;
+} Allocation;
+
+Allocation *createAllocationPool();
+memoryDesciption *createMemoryDesciption(int lineNo, int lengthOfSpace, char *fileName);
+void linkedList(Allocation *alloc, memoryDesciption *newMemDesc);
 
 #endif // AllocationPool_H

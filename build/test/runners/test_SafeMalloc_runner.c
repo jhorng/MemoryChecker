@@ -34,7 +34,10 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
-extern void test(void);
+extern void test1(void);
+extern void test_createAllocationPool_given_head_and_tail_both_return_NULL(void);
+extern void test_createMemoryDesciption_given_next_and_memory_both_return_NULL(void);
+extern void test_linkedList_given_two_memory_description_should_return_two_memory_description(void);
 
 
 //=======Test Reset Option=====
@@ -49,8 +52,11 @@ void resetTest(void)
 //=======MAIN=====
 int main(void)
 {
-  UnityBegin("test_Smalloc.c");
-  RUN_TEST(test, 10);
+  UnityBegin("test_SafeMalloc.c");
+  RUN_TEST(test1, 10);
+  RUN_TEST(test_createAllocationPool_given_head_and_tail_both_return_NULL, 20);
+  RUN_TEST(test_createMemoryDesciption_given_next_and_memory_both_return_NULL, 32);
+  RUN_TEST(test_linkedList_given_two_memory_description_should_return_two_memory_description, 44);
 
   return (UnityEnd());
 }
