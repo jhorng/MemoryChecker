@@ -8,7 +8,7 @@ struct memoryDesciption_t{
   memoryDesciption *next;
   int lineNo;
   int lengthOfSpace;
-  char *fileName;
+  char *fileNameMemory;
   void *memory;
 };
 
@@ -19,7 +19,7 @@ typedef struct{
 } Allocation;
 
 Allocation *createAllocationPool();
-memoryDesciption *createMemoryDesciption(int lineNo, int lengthOfSpace, char *fileName);
+memoryDesciption *createMemoryDesciption(int lineNo, int lengthOfSpace, char *fileNameMemory);
 void linkedList(Allocation *alloc, memoryDesciption *newMemDesc);
 
 #endif // AllocationPool_H

@@ -11,31 +11,25 @@ Allocation *createAllocationPool(){
   return alloc;
 }
 
-memoryDesciption *createMemoryDesciption(int lineNo, int lengthOfSpace, char *fileName){
-  memoryDesciption *newMemDesc = malloc(sizeof(Allocation));
+memoryDesciption *createMemoryDesciption(int lineNo, int lengthOfSpace, char *fileNameMemory){
+  
+  memoryDesciption *newMemDesc = malloc(sizeof(memoryDesciption));
   newMemDesc->next = NULL;
   newMemDesc->lineNo = lineNo;
   newMemDesc->lengthOfSpace = lengthOfSpace;
-  newMemDesc->fileName = fileName;
+  newMemDesc->fileNameMemory = fileNameMemory;
   newMemDesc->memory = NULL;
   return newMemDesc;
 }
 
 void linkedList(Allocation *alloc, memoryDesciption *newMemDesc){
-  if (alloc == NULL){
-    printf("Allocation cannot be NULL!");
+  if(alloc->head==NULL && alloc->tail==NULL){
+    alloc->head = newMemDesc;
+    alloc->tail = newMemDesc;
   }
-  else if (newMemDesc = NULL)
-    printf("Memory description cannot be NULL!");
   else{
-    if(alloc->head==NULL && alloc->tail==NULL){
-      alloc->head = newMemDesc;
-      alloc->tail = newMemDesc;
-    }
-    else{
-      alloc->tail->next = newMemDesc;
-      alloc->tail = newMemDesc;
-    }
-    alloc->noOfLinkedDesc++;
+    alloc->tail->next = newMemDesc;
+    alloc->tail = newMemDesc;
   }
+  alloc->noOfLinkedDesc++;
 }

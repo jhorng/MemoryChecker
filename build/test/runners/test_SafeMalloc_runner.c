@@ -34,9 +34,9 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
-extern void test1(void);
 extern void test_createAllocationPool_given_head_and_tail_both_return_NULL(void);
 extern void test_createMemoryDesciption_given_next_and_memory_both_return_NULL(void);
+extern void test_linkedList_given_one_memory_description_should_return_one_memory_description(void);
 extern void test_linkedList_given_two_memory_description_should_return_two_memory_description(void);
 
 
@@ -53,10 +53,10 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_SafeMalloc.c");
-  RUN_TEST(test1, 10);
-  RUN_TEST(test_createAllocationPool_given_head_and_tail_both_return_NULL, 20);
-  RUN_TEST(test_createMemoryDesciption_given_next_and_memory_both_return_NULL, 32);
-  RUN_TEST(test_linkedList_given_two_memory_description_should_return_two_memory_description, 44);
+  RUN_TEST(test_createAllocationPool_given_head_and_tail_both_return_NULL, 16);
+  RUN_TEST(test_createMemoryDesciption_given_next_and_memory_both_return_NULL, 28);
+  RUN_TEST(test_linkedList_given_one_memory_description_should_return_one_memory_description, 49);
+  RUN_TEST(test_linkedList_given_two_memory_description_should_return_two_memory_description, 64);
 
   return (UnityEnd());
 }

@@ -4,11 +4,9 @@
 #include <string.h>
 #include "Smalloc.h"
 
-void *_safeMalloc(int lineNumber, char fileName){
-  void *headerPtr,
-       *dataPtr,
-       *footerPtr;
-       
+void _safeMalloc(int lineNumber, char *fileName){
+  
+  void *headerPtr, *dataPtr, *footerPtr;       
        
   void *space = malloc(sizeof(HEADER_SIZE+DATA_SIZE+FOOTER_SIZE));
   
@@ -16,8 +14,5 @@ void *_safeMalloc(int lineNumber, char fileName){
   dataPtr     = space+HEADER_SIZE;
   footerPtr   = dataPtr +DATA_SIZE;
   
-  printf("Line number: %d\n\n", lineNumber);
   return;
 }
-
-

@@ -7,10 +7,6 @@ void setUp(void){}
 
 void tearDown(void){}
 
-void test1(){
-  safeMalloc();
-}
-
 /**
  *  HEAD -----+
  *  TAIL -----|
@@ -38,18 +34,56 @@ void test_createMemoryDesciption_given_next_and_memory_both_return_NULL(){
   printf("Next: %i\n", newMemDesc->next);
   printf("Line Number: %i\n", newMemDesc->lineNo);
   printf("Length of Space: %i\n", newMemDesc->lengthOfSpace);
-  printf("File name: %s\n", newMemDesc->fileName);
+  printf("File name: %s\n\n", newMemDesc->fileNameMemory);
+}
+
+/**
+ *    ---------         ----------
+ *   / alloc /  ---->  / memDesc / ------+
+ *  ---------         ----------         |
+ *                                      \/
+ *                                    -------
+ *                                   / NULL /
+ *                                  -------
+ */
+void test_linkedList_given_one_memory_description_should_return_one_memory_description(){
+  Allocation *alloc = createAllocationPool();
+  
+  linkedList(alloc, createMemoryDesciption(__LINE__, 400, __FILE__));
+  
+  TEST_ASSERT_EQUAL(400, alloc->head->lengthOfSpace);
+  TEST_ASSERT_NULL(alloc->head->next);
+  TEST_ASSERT_NULL(alloc->head->memory);
+  printf("--MemoryDescription--\nMemory: %i\n", alloc->head->memory);
+  printf("Next: %i\n", alloc->head->next);
+  printf("Line Number: %i\n", alloc->head->lineNo);
+  printf("Length of Space: %i\n", alloc->head->lengthOfSpace);
+  printf("File name: %s\n\n", alloc->head->fileNameMemory);
 }
 
 void test_linkedList_given_two_memory_description_should_return_two_memory_description(){
-  Allocation *newAlloc = createAllocationPool();
-  linkedList(newAlloc, createMemoryDesciption(__LINE__, 400, __FILE__));
-  linkedList(newAlloc, createMemoryDesciption(__LINE__, 500, __FILE__));
-  // TEST_ASSERT_EQUAL(400, newAlloc->head->lengthOfSpace);
+  Allocation *alloc = createAllocationPool();
+  
+  linkedList(alloc, createMemoryDesciption(__LINE__, 400, __FILE__));
+  linkedList(alloc, createMemoryDesciption(__LINE__, 500, __FILE__));
+  
+  TEST_ASSERT_EQUAL(400, alloc->head->lengthOfSpace);
+  TEST_ASSERT_EQUAL(500, alloc->head->next->lengthOfSpace);
+  TEST_ASSERT_NULL(alloc->tail->next);
+  printf("--MemoryDescription[1]--\n");
+  printf("Memory[1]: %i\n", alloc->head->memory);
+  printf("Next[1]: %i\n", alloc->head->memory);
+  printf("Line Number[1]: %i\n", alloc->head->lineNo);
+  printf("Length of Space[1]: %i\n", alloc->head->lengthOfSpace);
+  printf("File name[1]: %s\n\n", alloc->head->fileNameMemory);
+  
+  printf("--MemoryDescription[2]--\n");
+  printf("Memory[2]: %i\n", alloc->head->next->memory);
+  printf("Next[2]: %i\n", alloc->head->next->next);
+  printf("Line Number[2]: %i\n", alloc->head->next->lineNo);
+  printf("Length of Space[2]: %i\n", alloc->head->next->lengthOfSpace);
+  printf("File name[2]: %s\n\n", alloc->head->next->fileNameMemory);
 }
-
-
-
 
 
 

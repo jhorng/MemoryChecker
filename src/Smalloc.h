@@ -5,14 +5,13 @@
 #define HEADER_SIZE 21
 #define FOOTER_SIZE 21
 
-#define safeMalloc() _safeMalloc(__LINE__,__FILE__)
+#define safeMalloc() _safeMalloc(__LINE__, __FILE__)
 
 typedef struct {
-  int headerSize;
-  int footerSize;
-  int size;
+  int lineNumber;
+  char *fileName;
 } Space;
 
-Space *createMemorySpace();
+void _safeMalloc(int lineNumber, char *fileName);
 
 #endif // Smalloc_H
