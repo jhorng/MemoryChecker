@@ -3,9 +3,9 @@
 
 #define DATA_SIZE   100
 #define HEADER_SIZE 21
-#define FOOTER_SIZE 21
+#define FOOTER_SIZE 21  //HEADER_SIZE AND FOOTER_SIZE MUST BE THE SAME!!
 
-#define safeMalloc() _safeMalloc(__LINE__,__FILE__)
+#define safeMalloc(size) _safeMalloc(size,__LINE__,__FILE__)
 
 
 typedef struct {
@@ -14,6 +14,8 @@ typedef struct {
   int size;
 } Space;
 
+
+void *_safeMalloc(int size,int lineNumber, char *fileName);
 Space *createMemorySpace();
 void patternRepeat( int timesToCopy,char *pattern, char *pointer);
 
