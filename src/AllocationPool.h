@@ -9,7 +9,7 @@ struct memoryDesciption_t{
   int lineNo;
   int lengthOfSpace;
   char *fileNameMemory;
-  void *memory;
+  void *memoryStor;
 };
 
 typedef struct{
