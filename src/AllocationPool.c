@@ -12,13 +12,12 @@ Allocation *createAllocationPool(){
 }
 
 memoryDesciption *createMemoryDesciption(int lineNo, int lengthOfSpace, char *fileNameMemory){
-  
   memoryDesciption *newMemDesc = malloc(sizeof(memoryDesciption));
   newMemDesc->next = NULL;
   newMemDesc->lineNo = lineNo;
   newMemDesc->lengthOfSpace = lengthOfSpace;
   newMemDesc->fileNameMemory = fileNameMemory;
-  newMemDesc->memory = NULL;
+  newMemDesc->memoryStor = NULL;
   return newMemDesc;
 }
 
@@ -33,3 +32,5 @@ void linkedList(Allocation *alloc, memoryDesciption *newMemDesc){
   }
   alloc->noOfLinkedDesc++;
 }
+
+
