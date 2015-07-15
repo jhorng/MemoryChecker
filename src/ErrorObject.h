@@ -2,7 +2,8 @@
 #define ErrorObject_H
 
 typedef enum{
-  ERR_USED_EXTRA_SPACE
+  ERR_USED_EXTRA_SPACE,
+  ERR_EXCEED_DATA_SIZE,
 } ErrorCode;
 
 typedef struct{

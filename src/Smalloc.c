@@ -5,7 +5,7 @@
 #include "CException.h"
 #include "Smalloc.h"
 
-#include "ErrorCode.h"
+#include "ErrorObject.h"
 
 
 
@@ -14,11 +14,13 @@ void *_safeMalloc(int size,int lineNumber, char *fileName){
        *dataPtr,
        *footerPtr;
        
-  if(size=0)
+  char message[100];
+       
+  if(size==0)
     return NULL;
   else if(size>DATA_SIZE){
-        printf("Unable to create (%d) space at line %d from file %s\n",size,lineNumber,fileName);
-        Throw(ERR_EXCEED_DATA_SIZE);
+        sprintf(message,"Unable to create (%d) space at line %d from file %s\n",size,lineNumber,fileName);
+        throwError(message, ERR_EXCEED_DATA_SIZE);
     } 
     
        
@@ -27,17 +29,17 @@ void *_safeMalloc(int size,int lineNumber, char *fileName){
   
   headerPtr   = space;
   dataPtr     = space+HEADER_SIZE;
-  footerPtr   = dataPtr +DATA_SIZE;
+  footerPtr   = dataPtr +size;
   
-    
-  printf("space:%p\n",space);
-  printf("head :%p\n",headerPtr);
-  printf("data :%p\n",dataPtr);
-  printf("foot :%p\n",footerPtr);
+  
+  patternRepeat(5,CODE_PATTERN,headerPtr); 
+ //patternRepeat(1,CODE_PATTERN,footerPtr); 
+  
+
   printf("foot :%d\n",lineNumber);
   printf("foot :%s\n",fileName);
   
-  return;
+  return dataPtr;
 }
 
 

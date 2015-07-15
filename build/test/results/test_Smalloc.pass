@@ -4,35 +4,32 @@
   :file: test_Smalloc.c
 :successes:
 - :test: test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory
-  :line: 11
+  :line: 14
   :message: ''
 - :test: test_repeatPattern_given_x_pattern_with_2_times_should_have_xx_in_the_memory
-  :line: 17
+  :line: 22
   :message: ''
 - :test: test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in_the_memory
-  :line: 26
+  :line: 33
   :message: ''
 - :test: test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_memory
-  :line: 35
+  :line: 43
   :message: ''
 - :test: test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory
-  :line: 44
+  :line: 53
   :message: ''
 - :test: test_safeMalloc_if_NULL_return_NULL
-  :line: 72
+  :line: 79
+  :message: ''
+- :test: test_safeMalloc_should_throw_err__size_exceed_the_DATA_SIZE
+  :line: 85
   :message: ''
 :failures: []
 :ignores: []
 :counts:
-  :total: 6
-  :passed: 6
+  :total: 7
+  :passed: 7
   :failed: 0
   :ignored: 0
 :stdout:
-- space:00891050
-- head :00891050
-- data :00891065
-- foot :008910C9
-- foot :73
-- foot :test/test_Smalloc.c
 - ''

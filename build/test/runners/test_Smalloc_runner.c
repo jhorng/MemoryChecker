@@ -40,6 +40,7 @@ extern void test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in
 extern void test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_memory(void);
 extern void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory(void);
 extern void test_safeMalloc_if_NULL_return_NULL(void);
+extern void test_safeMalloc_should_throw_err__size_exceed_the_DATA_SIZE(void);
 
 
 //=======Test Reset Option=====
@@ -55,12 +56,13 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_Smalloc.c");
-  RUN_TEST(test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory, 11);
-  RUN_TEST(test_repeatPattern_given_x_pattern_with_2_times_should_have_xx_in_the_memory, 17);
-  RUN_TEST(test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in_the_memory, 26);
-  RUN_TEST(test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_memory, 35);
-  RUN_TEST(test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory, 44);
-  RUN_TEST(test_safeMalloc_if_NULL_return_NULL, 72);
+  RUN_TEST(test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory, 14);
+  RUN_TEST(test_repeatPattern_given_x_pattern_with_2_times_should_have_xx_in_the_memory, 22);
+  RUN_TEST(test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in_the_memory, 33);
+  RUN_TEST(test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_memory, 43);
+  RUN_TEST(test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory, 53);
+  RUN_TEST(test_safeMalloc_if_NULL_return_NULL, 79);
+  RUN_TEST(test_safeMalloc_should_throw_err__size_exceed_the_DATA_SIZE, 85);
 
   return (UnityEnd());
 }

@@ -1,4 +1,6 @@
 ---
 - unity.h
 - Smalloc.h
+- CException.h
 - AllocationPool.h
+- ErrorObject.h
