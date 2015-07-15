@@ -34,15 +34,6 @@ char* GlobalOrderError;
 //=======External Functions This Runner Calls=====
 extern void setUp(void);
 extern void tearDown(void);
-extern void test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory(void);
-extern void test_repeatPattern_given_x_pattern_with_2_times_should_have_xx_in_the_memory(void);
-extern void test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in_the_memory(void);
-extern void test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_memory(void);
-extern void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory(void);
-extern void test_createAllocationPool_given_head_and_tail_both_return_NULL(void);
-extern void test_createMemoryDesciption_given_next_and_memory_both_return_NULL(void);
-extern void test_linkedList_given_one_memory_description_should_return_one_memory_description(void);
-extern void test_linkedList_given_two_memory_description_should_return_two_memory_description(void);
 
 
 //=======Test Reset Option=====
@@ -58,15 +49,6 @@ void resetTest(void)
 int main(void)
 {
   UnityBegin("test_SafeMalloc.c");
-  RUN_TEST(test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory, 11);
-  RUN_TEST(test_repeatPattern_given_x_pattern_with_2_times_should_have_xx_in_the_memory, 17);
-  RUN_TEST(test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in_the_memory, 26);
-  RUN_TEST(test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_memory, 35);
-  RUN_TEST(test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory, 44);
-  RUN_TEST(test_createAllocationPool_given_head_and_tail_both_return_NULL, 75);
-  RUN_TEST(test_createMemoryDesciption_given_next_and_memory_both_return_NULL, 87);
-  RUN_TEST(test_linkedList_given_one_memory_description_should_return_one_memory_description, 108);
-  RUN_TEST(test_linkedList_given_two_memory_description_should_return_two_memory_description, 133);
 
   return (UnityEnd());
 }

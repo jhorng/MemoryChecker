@@ -3,9 +3,9 @@
 
 #include "Smalloc.h"
 
-typedef struct memoryDesciption_t memoryDesciption;
-struct memoryDesciption_t{
-  memoryDesciption *next;
+typedef struct memoryDescription_t memoryDescription;
+struct memoryDescription_t{
+  memoryDescription *next;
   int lineNo;
   int lengthOfSpace;
   char *fileNameMemory;
@@ -13,13 +13,12 @@ struct memoryDesciption_t{
 };
 
 typedef struct{
-  memoryDesciption *head;
-  memoryDesciption *tail;
+  memoryDescription *head;
+  memoryDescription *tail;
   int noOfLinkedDesc;
 } Allocation;
 
 Allocation *createAllocationPool();
-memoryDesciption *createMemoryDesciption(int lineNo, int lengthOfSpace, char *fileNameMemory);
-void linkedList(Allocation *alloc, memoryDesciption *newMemDesc);
+memoryDescription *createMemoryDescription(int lineNo, int lengthOfSpace, char *fileNameMemory);
 
 #endif // AllocationPool_H

@@ -3,38 +3,34 @@
 #include <malloc.h>
 #include <string.h>
 #include "Smalloc.h"
+#include "AllocationPool.h"
+#include "ErrorObject.h"
 
-void *_safeMalloc(int size,int lineNumber, char *fileName){
+/**
+ *  create a memory block
+ *  if size defined is larger than DATA_SIZE,
+ *  throw error, ERR_EXCEED_DATA_SIZE.
+ */
+void *_safeMalloc(int size, int lineNumber, char *fileName){
   void *headerPtr,
        *dataPtr,
        *footerPtr;
-       
+
   if(size=0)
     return NULL;
   else if(size>DATA_SIZE){
         printf("Unable to create (%d) space at line %d from file %s\n",size,lineNumber,fileName);
         Throw(ERR_EXCEED_DATA_SIZE);
-    } 
-    
-       
-       
+  }
+
   void *space = malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
-  
+
   headerPtr   = space;
   dataPtr     = space+HEADER_SIZE;
-  footerPtr   = dataPtr +DATA_SIZE;
-  
-    
-  printf("space:%p\n",space);
-  printf("head :%p\n",headerPtr);
-  printf("data :%p\n",dataPtr);
-  printf("foot :%p\n",footerPtr);
-  printf("foot :%d\n",lineNumber);
-  printf("foot :%s\n",fileName);
-  
+  footerPtr   = dataPtr+DATA_SIZE;
+
   return;
 }
-
 
 /**
  *  @brief Copy repetitive patterns into memory
@@ -46,14 +42,26 @@ void patternRepeat(int timesToCopy, char *pattern, char *pointer){
   char *temp;
   int i;
   size_t slen = strlen(pattern);
-  
- // printf("%d\n",patternLength);
+
   for ( i=0,temp = pointer ; i<timesToCopy; ++i, temp+=slen){
     memcpy(temp, pattern, slen);
-    
+
     if((temp+slen)>pointer+FOOTER_SIZE) break;
   }
   *temp = '\0';
+}
 
-  
+/**
+ *  link allocation and memory description
+ */
+void linkedList(Allocation *alloc, memoryDescription *newMemDesc){  //*ptr
+  if(alloc->head==NULL && alloc->tail==NULL){
+    alloc->head = newMemDesc;
+    alloc->tail = newMemDesc;
+  }
+  else{
+    alloc->tail->next = newMemDesc;
+    alloc->tail = newMemDesc;
+  }
+  alloc->noOfLinkedDesc++;
 }
