@@ -64,3 +64,32 @@ void patternRepeat(int timesToCopy, char *pattern, char *pointer){
 
   
 }
+
+
+/**
+ *  @brief check repetitive patterns in the memory
+ *  @arg  
+ */
+void patternCheck(char *pointer){
+  int checkingValue, i=-1;
+  char memory[HEADER_SIZE];
+  patternRepeat(5,"xyZa",memory);
+  
+  checkingValue =strcmp(memory,pointer);
+  
+  
+  if(checkingValue!=0){
+    for(i=0;i<HEADER_SIZE;i++){
+      checkingValue=strncmp(memory,pointer,i);
+      if(checkingValue!=0) 
+        break;
+    }
+  }
+  
+  /* 
+  printf("no%s",memory);
+  printf("no%d",i); */
+	
+	
+	
+}
