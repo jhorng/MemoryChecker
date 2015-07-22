@@ -59,7 +59,7 @@
 - 'Total number of linked file(s): 1'
 - ''
 - "--MemoryDescription[1]--"
-- 'Next[1]: 00781778'
+- 'Next[1]: 003D10F8'
 - 'Line Number[1]: 141'
 - 'Length of Space[1]: 400'
 - 'File name[1]: test/test_SafeMalloc.c'
