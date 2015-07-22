@@ -10,6 +10,8 @@
 
 #define safeMalloc(size) _safeMalloc(size,__LINE__,__FILE__)
 
+MemoryDescription *allocateMemory(int size, int lineNumber, char *fileName);
+
 void *_safeMalloc(int size,int lineNumber, char *fileName);
 void patternRepeat( int timesToCopy,char *pattern, char *pointer);
 void listAdd(Allocation *alloc, memoryDescription *newMemDesc);
