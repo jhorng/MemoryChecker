@@ -17,8 +17,8 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
   if(size==0)
     return NULL;
   else if(size>DATA_SIZE){
-    printf(message,"Unable to create (%d) space at line %d from file %s\n",size,lineNumber,fileName);
-    throwError(message, ERR_EXCEED_DATA_SIZE);
+    printf("Unable to create (%d) space at line %d from file %s\n",size,lineNumber,fileName);
+    // throwError(message, ERR_EXCEED_DATA_SIZE);
   } 
 
   void *space = malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
@@ -65,7 +65,7 @@ void patternCheck(char *pointer){
   char memory[HEADER_SIZE];
   patternRepeat(5,"xyZa",memory);
   
-  checkingValue =strcmp(memory,pointer);
+  checkingValue = strcmp(memory,pointer);
   
   
   if(checkingValue!=0){
@@ -75,10 +75,6 @@ void patternCheck(char *pointer){
         break;
     }
   }
-  
-  /* 
-  printf("no%s",memory);
-  printf("no%d",i); */
 }
 
 /**

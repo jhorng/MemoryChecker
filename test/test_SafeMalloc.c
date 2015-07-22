@@ -5,9 +5,9 @@
 #include "Smalloc.h"
 #include "AllocationPool.h"
 
-void setUp(void){}
+void setUp(void) {}
 
-void tearDown(void){}
+void tearDown(void) {}
 
 // set Allocation as global variable
 Allocation *alloc = NULL;

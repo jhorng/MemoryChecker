@@ -3,11 +3,11 @@
 #include "unity.h"
 
 
-void setUp(void){}
+void setUp(void) {}
 
 
 
-void tearDown(void){}
+void tearDown(void) {}
 
 
 
