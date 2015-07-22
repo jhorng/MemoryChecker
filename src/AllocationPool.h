@@ -1,8 +1,6 @@
 #ifndef AllocationPool_H
 #define AllocationPool_H
 
-#include "Smalloc.h"
-
 typedef struct memoryDescription_t memoryDescription;
 struct memoryDescription_t{
   memoryDescription *next;

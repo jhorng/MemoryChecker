@@ -4,19 +4,19 @@
 #include "Smalloc.h"
 
 Allocation *createAllocationPool(){
-  Allocation *alloc = malloc(sizeof(Allocation));
+  Allocation *alloc = (Allocation *)malloc(sizeof(Allocation));
   alloc->head = NULL;
   alloc->tail = NULL;
   alloc->noOfLinkedDesc = 0;
   return alloc;
 }
 
-memoryDescription *createMemoryDescription(int lineNo, int lengthOfSpace, char *fileNameMemory){
-  memoryDescription *newMemDesc = malloc(sizeof(memoryDescription));
+memoryDescription *createMemoryDescription(int lineNumber, int sizeDefined, char *fileName){
+  memoryDescription *newMemDesc = (memoryDescription *)malloc(sizeof(memoryDescription));
   newMemDesc->next = NULL;
-  newMemDesc->lineNo = lineNo;
-  newMemDesc->lengthOfSpace = lengthOfSpace;
-  newMemDesc->fileNameMemory = fileNameMemory;
+  newMemDesc->lineNo = lineNumber;
+  newMemDesc->lengthOfSpace = sizeDefined;
+  newMemDesc->fileNameMemory = fileName;
   newMemDesc->memoryStor = NULL;
   return newMemDesc;
 }

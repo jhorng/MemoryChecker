@@ -8,7 +8,10 @@
 void setUp(void){}
 
 void tearDown(void){}
-/*
+
+// set Allocation as global variable
+Allocation *alloc = NULL;
+
 void test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory(){
   char *memory = malloc(20);
   patternRepeat(1,"x",memory);
@@ -66,27 +69,27 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
   TEST_ASSERT_EQUAL_HEX('Z', *(memory+18));
   TEST_ASSERT_EQUAL_HEX('a', *(memory+19));
 }
- */
+
 /**
  *  HEAD -----+
  *  TAIL -----|
  *           \/
  *          NULL
  */
-/* void test_createAllocationPool_given_head_and_tail_both_return_NULL(){
+void test_createAllocationPool_given_head_and_tail_both_return_NULL(){
   Allocation *newAlloc = createAllocationPool();
   TEST_ASSERT_NULL(newAlloc->head);
   TEST_ASSERT_NULL(newAlloc->tail);
   TEST_ASSERT_EQUAL(0, newAlloc->noOfLinkedDesc);
   printf("--Allocation--\nHead: %i\nTail: %i\n", newAlloc->head, newAlloc->tail);
   printf("Number of linked memoryStor description: %d\n\n", newAlloc->noOfLinkedDesc);
-} */
+} 
 
 /**
  *  To test the memoryDescription whether will work as the logic
  */
-/* void test_createMemoryDescription_given_next_and_memory_both_return_NULL(){
-  memoryDesciption *newMemDesc = createMemoryDesciption(__LINE__, 500, __FILE__);
+void test_createMemoryDescription_given_next_and_memory_both_return_NULL(){
+  memoryDescription *newMemDesc = createMemoryDescription(__LINE__, 500, __FILE__);
   TEST_ASSERT_EQUAL(500, newMemDesc->lengthOfSpace);
   TEST_ASSERT_NULL(newMemDesc->memoryStor);
   TEST_ASSERT_NULL(newMemDesc->next);
@@ -95,7 +98,7 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
   printf("Line Number: %i\n", newMemDesc->lineNo);
   printf("Length of Space: %i\n", newMemDesc->lengthOfSpace);
   printf("File name: %s\n\n", newMemDesc->fileNameMemory);
-} */
+}
 
 /**
  *    ---------         ----------
@@ -106,57 +109,58 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
  *                                   / NULL /
  *                                  -------
  */
-/* void test_linkedList_given_one_memory_description_should_return_one_memory_description(){
-  Allocation *alloc = createAllocationPool();
+void test_linkedList_given_one_memory_description_should_return_one_memory_description(){
+  alloc = createAllocationPool();
 
-  linkedList(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
+  listAdd(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
 
   TEST_ASSERT_EQUAL(400, alloc->head->lengthOfSpace);
-  TEST_ASSERT_NULL(alloc->head->next);
-  printf("--MemoryDescription--\nMemory: %i\n", alloc->head->memoryStor);
-  printf("Next: %i\n", alloc->head->next);
+  TEST_ASSERT_NULL(alloc->tail->next);
+  printf("--Linked list--\n");
+  printf("Next: %p\n", alloc->head->next);
   printf("Line Number: %i\n", alloc->head->lineNo);
   printf("Length of Space: %i\n", alloc->head->lengthOfSpace);
-  printf("File name: %s\n\n", alloc->head->fileNameMemory);
+  printf("File name: %s\n", alloc->head->fileNameMemory);
+  printf("Memory: %p\n", alloc->head->memoryStor);
   printf("Total number of linked file(s): %d\n\n", alloc->noOfLinkedDesc);
-} */
+}
 
 /**
- *    ---------         ----------      ----------
- *   / alloc /  ---->  / memDesc /     / memDesc / ------+
- *  ---------         ----------      ----------        |
- *                                                      |
- *                                                     \/
+ *    ---------         ----------        ----------
+ *   / alloc /  ---->  / memDesc / ----> / memDesc / ------+
+ *  ---------         ----------        ----------        |
+ *                                                       |
+ *                                                      \/
+ *                                                   -------
+ *                                                  / NULL /
  *                                                 -------
- *                                                / NULL /
- *                                               -------
  */
-/* void test_linkedList_given_two_memory_description_should_return_two_memory_description(){
-  Allocation *alloc = createAllocationPool();
+void test_linkedList_given_two_memory_description_should_return_two_memory_description(){
+  alloc = createAllocationPool();
 
-  linkedList(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
-  linkedList(alloc, createMemoryDescription(__LINE__, 500, __FILE__));
+  listAdd(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
+  listAdd(alloc, createMemoryDescription(__LINE__, 500, __FILE__));
 
   TEST_ASSERT_EQUAL(400, alloc->head->lengthOfSpace);
   TEST_ASSERT_EQUAL(500, alloc->head->next->lengthOfSpace);
   TEST_ASSERT_EQUAL(2, alloc->noOfLinkedDesc);
   TEST_ASSERT_NULL(alloc->tail->next);
   printf("--MemoryDescription[1]--\n");
-  printf("memoryStor[1]: %i\n", alloc->head->memoryStor);
   printf("Next[1]: %p\n", alloc->head->next);
   printf("Line Number[1]: %i\n", alloc->head->lineNo);
   printf("Length of Space[1]: %i\n", alloc->head->lengthOfSpace);
-  printf("File name[1]: %s\n\n", alloc->head->fileNameMemory);
+  printf("File name[1]: %s\n", alloc->head->fileNameMemory);
+  printf("Memory[1]: %p\n\n", alloc->head->memoryStor);
 
   printf("--MemoryDescription[2]--\n");
-  printf("memoryStor[2]: %i\n", alloc->head->next->memoryStor);
-  printf("Next[2]: %i\n", alloc->head->next->next);
-  printf("Line Number[2]: %i\n", alloc->head->next->lineNo);
-  printf("Length of Space[2]: %i\n", alloc->head->next->lengthOfSpace);
-  printf("File name[2]: %s\n\n", alloc->head->next->fileNameMemory);
+  printf("Next[2]: %p\n", alloc->tail->next);
+  printf("Line Number[2]: %i\n", alloc->tail->lineNo);
+  printf("Length of Space[2]: %i\n", alloc->tail->lengthOfSpace);
+  printf("File name[2]: %s\n", alloc->tail->fileNameMemory);
+  printf("memory[2]: %p\n\n", alloc->tail->memoryStor);
 
   printf("Total number of linked file(s): %d\n\n", alloc->noOfLinkedDesc);
-}  */
+}
 
 
 

@@ -9,8 +9,15 @@
 
 #define safeMalloc(size) _safeMalloc(size,__LINE__,__FILE__)
 
+typedef struct {
+  int lineNumber;
+  int sizeDefined;
+  char *fileName;
+  void *address;
+} fileInfo;
+
 void *_safeMalloc(int size,int lineNumber, char *fileName);
 void patternRepeat( int timesToCopy,char *pattern, char *pointer);
-void linkedList(Allocation *alloc, memoryDescription *newMemDesc);
+void listAdd(Allocation *alloc, memoryDescription *newMemDesc);
 
 #endif // Smalloc_H

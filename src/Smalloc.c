@@ -23,13 +23,18 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
         Throw(ERR_EXCEED_DATA_SIZE);
   }
 
-  void *space = malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
+  void *space = (int *) malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
 
   headerPtr   = space;
   dataPtr     = space+HEADER_SIZE;
   footerPtr   = dataPtr+DATA_SIZE;
-
-  return;
+  
+  fileInfo *info = malloc(sizeof(fileInfo));
+  
+  info->lineNumber = lineNumber;
+  info->sizeDefined = size;
+  info->fileName = fileName;
+  info->address = dataPtr;
 }
 
 /**
@@ -54,7 +59,7 @@ void patternRepeat(int timesToCopy, char *pattern, char *pointer){
 /**
  *  link allocation and memory description
  */
-void linkedList(Allocation *alloc, memoryDescription *newMemDesc){  //*ptr
+void listAdd(Allocation *alloc, memoryDescription *newMemDesc){
   if(alloc->head==NULL && alloc->tail==NULL){
     alloc->head = newMemDesc;
     alloc->tail = newMemDesc;
