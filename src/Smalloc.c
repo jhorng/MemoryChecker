@@ -19,14 +19,16 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
 
   char message[100];
 
+// this part can consider to be removed if useless
   if(size==0)
     return NULL;
   else if(size>DATA_SIZE){
     printf("Unable to create (%d) space at line %d from file %s\n",size,lineNumber,fileName);
     // throwError(message, ERR_EXCEED_DATA_SIZE);
   }
-
-/////////////////////
+//
+  
+///////////////////// (this portion will be moved to allocateMemory())
   void *space = malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
 
   headerPtr   = space;
@@ -39,11 +41,7 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
 
 
   patternRepeat(5,CODE_PATTERN,headerPtr);
- //patternRepeat(1,CODE_PATTERN,footerPtr);
-
-
-  printf("foot :%d\n",lineNumber);
-  printf("foot :%s\n",fileName);
+  patternRepeat(1,CODE_PATTERN,footerPtr);
 }
 
 /**
@@ -90,7 +88,7 @@ void patternCheck(char *pointer){
 /**
  *  link allocation and memory description
  */
-void listAdd(Allocation *alloc, memoryDescription *newMemDesc){
+void listAdd(Allocation *alloc, MemoryDescription *newMemDesc){
   if(alloc->head==NULL && alloc->tail==NULL){
     alloc->head = newMemDesc;
     alloc->tail = newMemDesc;

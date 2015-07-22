@@ -89,7 +89,7 @@ void test_createAllocationPool_given_head_and_tail_both_return_NULL(){
  *  To test the memoryDescription whether will work as the logic
  */
 void test_createMemoryDescription_given_next_and_memory_both_return_NULL(){
-  memoryDescription *newMemDesc = createMemoryDescription(__LINE__, 500, __FILE__);
+  MemoryDescription *newMemDesc = createMemoryDescription(__LINE__, 500, __FILE__);
   TEST_ASSERT_EQUAL(500, newMemDesc->lengthOfSpace);
   TEST_ASSERT_NULL(newMemDesc->memoryStor);
   TEST_ASSERT_NULL(newMemDesc->next);

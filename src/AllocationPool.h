@@ -1,10 +1,9 @@
 #ifndef AllocationPool_H
 #define AllocationPool_H
 
-typedef struct memoryDescription_t memoryDescription;
-typedef struct memoryDescription_t MemoryDescription;
-struct memoryDescription_t{
-  memoryDescription *next;
+typedef struct MemoryDescription_t MemoryDescription;
+struct MemoryDescription_t{
+  MemoryDescription *next;
   int lineNo;
   int lengthOfSpace;
   char *fileNameMemory;
@@ -14,12 +13,12 @@ struct memoryDescription_t{
 };
 
 typedef struct{
-  memoryDescription *head;
-  memoryDescription *tail;
+  MemoryDescription *head;
+  MemoryDescription *tail;
   int noOfLinkedDesc;
 } Allocation;
 
 Allocation *createAllocationPool();
-memoryDescription *createMemoryDescription(int lineNo, int lengthOfSpace, char *fileNameMemory);
+MemoryDescription *createMemoryDescription(int lineNo, int lengthOfSpace, char *fileNameMemory);
 
 #endif // AllocationPool_H

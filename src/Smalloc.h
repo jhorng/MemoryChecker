@@ -14,7 +14,7 @@ MemoryDescription *allocateMemory(int size, int lineNumber, char *fileName);
 
 void *_safeMalloc(int size,int lineNumber, char *fileName);
 void patternRepeat( int timesToCopy,char *pattern, char *pointer);
-void listAdd(Allocation *alloc, memoryDescription *newMemDesc);
+void listAdd(Allocation *alloc, MemoryDescription *newMemDesc);
 void patternRepeat( int timesToCopy,char *pattern, char *pointer);
 void patternCheck(char *pointer);
 
