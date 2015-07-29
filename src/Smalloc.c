@@ -8,8 +8,8 @@
 #include "ErrorObject.h"
 
 MemoryDescription *allocateAddress(int size) {
-  MemoryDescription *ptrMemory = malloc(sizeof(MemoryDescription)+sizeof(HEADER_SIZE+size+FOOTER_SIZE));
-  char *headerPtr, *dataPtr, *footerPtr;
+  MemoryDescription *ptrMemory = malloc(sizeof(MemoryDescription));
+  char *headerPtr , *dataPtr , *footerPtr; 
 
   char *space = (char *)malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
 
@@ -20,6 +20,9 @@ MemoryDescription *allocateAddress(int size) {
   ptrMemory->headerAddress = headerPtr;
   ptrMemory->memoryAddress = dataPtr;
   ptrMemory->footerAddress = footerPtr;
+  
+  patternRepeat(5, CODE_PATTERN, headerPtr);//generate pattern for header and footer
+  patternRepeat(5, CODE_PATTERN, footerPtr);
 
   return ptrMemory;
 }
@@ -34,15 +37,14 @@ MemoryDescription *allocateAddress(int size) {
 void patternRepeat(int timesToCopy, char *pattern, char *pointer){
   char *temp;
   int i;
-  size_t slen = strlen(pattern);
-
-  // printf("%d\n",patternLength);
-  for ( i=0,temp = pointer ; i<timesToCopy; ++i, temp+=slen){
-    memcpy(temp, pattern, slen);
-
-    if((temp+slen)>pointer+FOOTER_SIZE) break;
+  int slen = strlen(pattern);
+  for ( i=0 ; i<(timesToCopy); i++){
+    temp=(pointer+(i*slen));
+   strcpy((temp),pattern);
+    if(((i+2)*slen)>FOOTER_SIZE)//if the pattern will overflow, break from loop
+      break;
   }
-  *temp = '\0';
+ // *temp = '\0';
 }
 
 /**
@@ -55,7 +57,6 @@ void patternCheck(char *pointer){
   patternRepeat(5,"xyZa",memory);
 
   checkingValue = strcmp(memory,pointer);
-
 
   if(checkingValue!=0){
     for(i=0;i<HEADER_SIZE;i++){
@@ -91,6 +92,4 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
   memDesc = createMemoryDescription(lineNumber, size, fileName);
   allocAddr = allocateAddress(size);
   
-  // patternRepeat(5,CODE_PATTERN,headerPtr);
-  // patternRepeat(1,CODE_PATTERN,footerPtr);
 }
