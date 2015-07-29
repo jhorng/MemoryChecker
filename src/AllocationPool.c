@@ -1,7 +1,6 @@
-#include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include "AllocationPool.h"
-#include "Smalloc.h"
+#include "MemoryDescription.h"
 
 Allocation *createAllocationPool(){
   Allocation *alloc = (Allocation *)malloc(sizeof(Allocation));
@@ -11,14 +10,4 @@ Allocation *createAllocationPool(){
   return alloc;
 }
 
-MemoryDescription *createMemoryDescription(int lineNumber, int sizeDefined, char *fileName){
-  MemoryDescription *newMemDesc = (MemoryDescription *)malloc(sizeof(MemoryDescription));
-  newMemDesc->next = NULL;
-  newMemDesc->lineNumber = lineNumber;
-  newMemDesc->lengthOfSpace = sizeDefined;
-  newMemDesc->fileNameMemory = fileName;
-  newMemDesc->headerAddress = NULL;
-  newMemDesc->memoryAddress = NULL;
-  newMemDesc->footerAddress = NULL;
-  return newMemDesc;
-}
+// listAdd(Allocation *alloc, MemoryDescription *newMemDesc);

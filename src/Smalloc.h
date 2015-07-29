@@ -14,7 +14,6 @@ MemoryDescription *allocateAddress(int size);
 
 void *_safeMalloc(int size, int lineNumber, char *fileName);
 void patternRepeat(int timesToCopy, char *pattern, char *pointer);
-void listAdd(Allocation *alloc, MemoryDescription *newMemDesc);
 void patternCheck(char *pointer);
 
 #endif // Smalloc_H

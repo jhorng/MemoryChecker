@@ -6,6 +6,7 @@
 #include "Smalloc.h"
 #include "AllocationPool.h"
 #include "ErrorObject.h"
+#include "MemoryDescription.h"
 
 char *headerPtr, *dataPtr, *footerPtr;
 /**
@@ -24,6 +25,8 @@ MemoryDescription *allocateAddress(int size) {
   ptrMemory->headerAddress = headerPtr;
   ptrMemory->memoryAddress = dataPtr;
   ptrMemory->footerAddress = footerPtr;
+  
+  // printf("dataPtr: %p\n", dataPtr);
 
   return ptrMemory;
 }
@@ -70,20 +73,7 @@ void patternCheck(char *pointer){
   }
 }
 
-/**
- *  @breif link allocation and memory description
- */
-void listAdd(Allocation *alloc, MemoryDescription *newMemDesc){
-  if(alloc->head==NULL && alloc->tail==NULL){
-    alloc->head = newMemDesc;
-    alloc->tail = newMemDesc;
-  }
-  else{
-    alloc->tail->next = newMemDesc;
-    alloc->tail = newMemDesc;
-  }
-  alloc->noOfLinkedDesc++;
-}
+
 
 /**
  * @brief The main function for SafeMalloc.
@@ -94,6 +84,10 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
 
   memDesc = createMemoryDescription(lineNumber, size, fileName);
   allocAddr = allocateAddress(size);
+  
+  printf("Size: %d\n", memDesc->dataSize);
+  printf("Line number: %d\n", memDesc->mallocLine);
+  printf("File name: %s\n", memDesc->mallocFile);
   
   // patternRepeat(5,CODE_PATTERN,headerPtr);
   // patternRepeat(1,CODE_PATTERN,footerPtr);
