@@ -7,9 +7,13 @@
 #include "AllocationPool.h"
 #include "ErrorObject.h"
 
+char *headerPtr, *dataPtr, *footerPtr;
+/**
+ *  @brief to store the addresses of headerPtr, dataPtr and footerPtr
+ *         to MemoryDescription
+ */
 MemoryDescription *allocateAddress(int size) {
-  MemoryDescription *ptrMemory = malloc(sizeof(MemoryDescription)+sizeof(HEADER_SIZE+size+FOOTER_SIZE));
-  char *headerPtr, *dataPtr, *footerPtr;
+  MemoryDescription *ptrMemory = malloc(sizeof(MemoryDescription));
 
   char *space = (char *)malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
 

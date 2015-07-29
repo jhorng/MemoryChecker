@@ -5,6 +5,8 @@
 #include "Smalloc.h"
 #include "AllocationPool.h"
 
+extern char *headerPtr, *dataPtr, *footerPtr;
+
 void setUp(void) {}
 
 void tearDown(void) {}
@@ -80,7 +82,7 @@ void test_createMemoryDescription_given_next_and_memory_both_return_NULL(){
 void test_linkedList_given_one_memory_description_should_return_one_memory_description(){
   alloc = createAllocationPool();
 
-  listAdd(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
+  listAdd(alloc, createMemoryDescription(1234, 400, "C:/ThisFile.c"));
 
   TEST_ASSERT_EQUAL(400, alloc->head->lengthOfSpace);
   TEST_ASSERT_NULL(alloc->tail->next);
@@ -90,7 +92,7 @@ void test_linkedList_given_one_memory_description_should_return_one_memory_descr
   printf("Length of Space: %i\n", alloc->head->lengthOfSpace);
   printf("File name: %s\n", alloc->head->fileNameMemory);
   printf("Memory: %p\n", alloc->head->memoryAddress);
-  printf("Total number of linked file(s): %d\n\n", alloc->noOfLinkedDesc);
+  printf("Total number of linked file(s): %d\n\n\n", alloc->noOfLinkedDesc);
 }
 
 /**
@@ -106,8 +108,8 @@ void test_linkedList_given_one_memory_description_should_return_one_memory_descr
 void test_linkedList_given_two_memory_description_should_return_two_memory_description(){
   alloc = createAllocationPool();
 
-  listAdd(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
-  listAdd(alloc, createMemoryDescription(__LINE__, 500, __FILE__));
+  listAdd(alloc, createMemoryDescription(102, 400, "C:/testFile.c"));
+  listAdd(alloc, createMemoryDescription(__LINE__, 500, "C:/Dummy.c"));
 
   TEST_ASSERT_EQUAL(400, alloc->head->lengthOfSpace);
   TEST_ASSERT_EQUAL(500, alloc->head->next->lengthOfSpace);
@@ -125,7 +127,7 @@ void test_linkedList_given_two_memory_description_should_return_two_memory_descr
   printf("Line Number[2]: %i\n", alloc->tail->lineNumber);
   printf("Length of Space[2]: %i\n", alloc->tail->lengthOfSpace);
   printf("File name[2]: %s\n", alloc->tail->fileNameMemory);
-  printf("memory[2]: %p\n\n", alloc->tail->memoryAddress);
+  printf("memory[2]: %p\n", alloc->tail->memoryAddress);
 
   printf("Total number of linked file(s): %d\n\n", alloc->noOfLinkedDesc);
 }
@@ -133,9 +135,9 @@ void test_linkedList_given_two_memory_description_should_return_two_memory_descr
 void test_allocateAddress() {
   MemoryDescription *address = allocateAddress(10);
   TEST_ASSERT_NOT_NULL(address);
-  // TEST_ASSERT_EQUAL_PTR(address->memoryStor - HEADER_SIZE, address->header);
-  // TEST_ASSERT_EQUAL_PTR(address->memoryStor + address->lengthOfSpace, address->footer);
-  printf("Header address: %p\n", address->headerAddress);
+  TEST_ASSERT_EQUAL_PTR(headerPtr, address->headerAddress);
+  TEST_ASSERT_EQUAL_PTR(dataPtr, address->memoryAddress);
+  TEST_ASSERT_EQUAL_PTR(footerPtr, address->footerAddress);
 }
 
 
