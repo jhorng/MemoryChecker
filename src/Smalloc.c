@@ -7,42 +7,23 @@
 #include "AllocationPool.h"
 #include "ErrorObject.h"
 
-MemoryDescription *allocateMemory(int size, int lineNumber, char *fileName) {
-  return NULL;
-}
+MemoryDescription *allocateAddress(int size) {
+  MemoryDescription *ptrMemory = malloc(sizeof(MemoryDescription)+sizeof(HEADER_SIZE+size+FOOTER_SIZE));
+  char *headerPtr, *dataPtr, *footerPtr;
 
-void *_safeMalloc(int size, int lineNumber, char *fileName){
-  MemoryDescription *memDesc;
-  void *headerPtr,
-       *dataPtr,
-       *footerPtr;
-
-  char message[100];
-
-// this part can consider to be removed if useless
-  if(size==0)
-    return NULL;
-  else if(size>DATA_SIZE){
-    printf("Unable to create (%d) space at line %d from file %s\n",size,lineNumber,fileName);
-    // throwError(message, ERR_EXCEED_DATA_SIZE);
-  }
-//
-  
-///////////////////// (this portion will be moved to allocateMemory())
-  void *space = malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
+  char *space = (char *)malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
 
   headerPtr   = space;
   dataPtr     = space+HEADER_SIZE;
-  footerPtr   = dataPtr +size;
-//////////////////////
-  memDesc = allocateMemory(size, lineNumber, fileName);
-////////////////////
+  footerPtr   = dataPtr+size;
 
+  ptrMemory->headerAddress = headerPtr;
+  ptrMemory->memoryAddress = dataPtr;
+  ptrMemory->footerAddress = footerPtr;
 
-
-  patternRepeat(5,CODE_PATTERN,headerPtr);
-  patternRepeat(1,CODE_PATTERN,footerPtr);
+  return ptrMemory;
 }
+
 
 /**
  *  @brief Copy repetitive patterns into memory
@@ -86,7 +67,7 @@ void patternCheck(char *pointer){
 }
 
 /**
- *  link allocation and memory description
+ *  @breif link allocation and memory description
  */
 void listAdd(Allocation *alloc, MemoryDescription *newMemDesc){
   if(alloc->head==NULL && alloc->tail==NULL){
@@ -98,4 +79,18 @@ void listAdd(Allocation *alloc, MemoryDescription *newMemDesc){
     alloc->tail = newMemDesc;
   }
   alloc->noOfLinkedDesc++;
+}
+
+/**
+ * @brief The main function for SafeMalloc.
+ */
+
+void *_safeMalloc(int size, int lineNumber, char *fileName){
+  MemoryDescription *memDesc, *allocAddr;
+
+  memDesc = createMemoryDescription(lineNumber, size, fileName);
+  allocAddr = allocateAddress(size);
+  
+  // patternRepeat(5,CODE_PATTERN,headerPtr);
+  // patternRepeat(1,CODE_PATTERN,footerPtr);
 }

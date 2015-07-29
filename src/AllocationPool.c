@@ -14,9 +14,11 @@ Allocation *createAllocationPool(){
 MemoryDescription *createMemoryDescription(int lineNumber, int sizeDefined, char *fileName){
   MemoryDescription *newMemDesc = (MemoryDescription *)malloc(sizeof(MemoryDescription));
   newMemDesc->next = NULL;
-  newMemDesc->lineNo = lineNumber;
+  newMemDesc->lineNumber = lineNumber;
   newMemDesc->lengthOfSpace = sizeDefined;
   newMemDesc->fileNameMemory = fileName;
-  newMemDesc->memoryStor = NULL;
+  newMemDesc->headerAddress = NULL;
+  newMemDesc->memoryAddress = NULL;
+  newMemDesc->footerAddress = NULL;
   return newMemDesc;
 }

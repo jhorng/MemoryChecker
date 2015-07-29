@@ -4,12 +4,12 @@
 typedef struct MemoryDescription_t MemoryDescription;
 struct MemoryDescription_t{
   MemoryDescription *next;
-  int lineNo;
+  int lineNumber;
   int lengthOfSpace;
   char *fileNameMemory;
-  char *header;
-  char *memoryStor;
-  char *footer;
+  char *headerAddress;
+  char *memoryAddress;
+  char *footerAddress;
 };
 
 typedef struct{
