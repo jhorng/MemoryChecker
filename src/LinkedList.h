@@ -3,6 +3,7 @@
 
 #include "AllocationPool.h"
 
-void listAdd(Allocation *alloc, MemoryDescription *newMemDesc);
+void listAddLast(Allocation *alloc, MemoryDescription *newMemDesc);
+void listAddFirst(Allocation *alloc, MemoryDescription *newMemDesc);
 
 #endif // LinkedList_H

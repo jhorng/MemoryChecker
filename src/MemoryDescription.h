@@ -14,6 +14,7 @@ struct MemoryDescription_t{
   char *freeFile;
 };
 
-MemoryDescription *createMemoryDescription(int lineNumber, int sizeDefined, char *fileName);
+MemoryDescription *createMallocMemDesc(int mallocLine, int sizeDefined, char *mallocFile);
+MemoryDescription *createFreeMemDesc(int freeLine, char *freeFile);
 
 #endif // MemoryDescription_H

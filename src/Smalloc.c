@@ -25,8 +25,6 @@ MemoryDescription *allocateAddress(int size) {
   ptrMemory->headerAddress = headerPtr;
   ptrMemory->memoryAddress = dataPtr;
   ptrMemory->footerAddress = footerPtr;
-  
-  // printf("dataPtr: %p\n", dataPtr);
 
   return ptrMemory;
 }
@@ -82,7 +80,7 @@ void patternCheck(char *pointer){
 void *_safeMalloc(int size, int lineNumber, char *fileName){
   MemoryDescription *memDesc, *allocAddr;
 
-  memDesc = createMemoryDescription(lineNumber, size, fileName);
+  memDesc = createMallocMemDesc(lineNumber, size, fileName);
   allocAddr = allocateAddress(size);
   
   printf("Size: %d\n", memDesc->dataSize);
