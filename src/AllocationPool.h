@@ -10,5 +10,6 @@ typedef struct{
 } Allocation;
 
 Allocation *createAllocationPool();
+void listIncreaseOrder(int size);
 
 #endif // AllocationPool_H
