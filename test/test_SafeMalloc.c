@@ -3,14 +3,14 @@
 #include <malloc.h>
 #include "unity.h"
 #include "Smalloc.h"
-#include "AllocationPool.h"
+#include "MemoryDescription.h"
+#include "LinkedList.h"
+
+extern char *headerPtr, *dataPtr, *footerPtr;
 
 void setUp(void) {}
 
 void tearDown(void) {}
-
-// set Allocation as global variable
-Allocation *alloc = NULL;
 
 void test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory(){
   char *memory = malloc(20);
@@ -45,6 +45,7 @@ void test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_mem
   TEST_ASSERT_EQUAL_HEX('a', *(memory+3));
 }
 
+
 void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory(){
   char *memory = malloc(21);//dr poh pls dun remove this, this is essential for testing overflow
   patternRepeat(6,"xyZa",memory);
@@ -77,22 +78,22 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
  *           \/
  *          NULL
  */
-void test_createAllocationPool_given_head_and_tail_both_return_NULL(){
+/* void test_createAllocationPool_given_head_and_tail_both_return_NULL(){
   Allocation *newAlloc = createAllocationPool();
   TEST_ASSERT_NULL(newAlloc->head);
   TEST_ASSERT_NULL(newAlloc->tail);
   TEST_ASSERT_EQUAL(0, newAlloc->noOfLinkedDesc);
-}
+} */
 
 /**
  *  To test the memoryDescription whether will work as the logic
  */
-void test_createMemoryDescription_given_next_and_memory_both_return_NULL(){
+/* void test_createMemoryDescription_given_next_and_memory_both_return_NULL(){
   MemoryDescription *newMemDesc = createMemoryDescription(__LINE__, 500, __FILE__);
   TEST_ASSERT_EQUAL(500, newMemDesc->lengthOfSpace);
   TEST_ASSERT_NULL(newMemDesc->memoryAddress);
   TEST_ASSERT_NULL(newMemDesc->next);
-}
+} */
 
 /**
  *    ---------         ----------
@@ -103,7 +104,7 @@ void test_createMemoryDescription_given_next_and_memory_both_return_NULL(){
  *                                   / NULL /
  *                                  -------
  */
-void test_linkedList_given_one_memory_description_should_return_one_memory_description(){
+/* void test_linkedList_given_one_memory_description_should_return_one_memory_description(){
   alloc = createAllocationPool();
 
   listAdd(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
@@ -117,7 +118,7 @@ void test_linkedList_given_one_memory_description_should_return_one_memory_descr
   printf("File name: %s\n", alloc->head->fileNameMemory);
   printf("Memory: %p\n", alloc->head->memoryAddress);
   printf("Total number of linked file(s): %d\n\n", alloc->noOfLinkedDesc);
-}
+} */
 
 /**
  *    ---------         ----------        ----------
@@ -129,7 +130,7 @@ void test_linkedList_given_one_memory_description_should_return_one_memory_descr
  *                                                  / NULL /
  *                                                 -------
  */
-void test_linkedList_given_two_memory_description_should_return_two_memory_description(){
+/* void test_linkedList_given_two_memory_description_should_return_two_memory_description(){
   alloc = createAllocationPool();
 
   listAdd(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
@@ -154,19 +155,24 @@ void test_linkedList_given_two_memory_description_should_return_two_memory_descr
   printf("memory[2]: %p\n\n", alloc->tail->memoryAddress);
 
   printf("Total number of linked file(s): %d\n\n", alloc->noOfLinkedDesc);
-}
+} */
 
-void test_allocateAddress() {
+
+void test_the_function_of_allocateAddress(){
+
   MemoryDescription *address = allocateAddress(10);
   TEST_ASSERT_NOT_NULL(address);
-  // TEST_ASSERT_EQUAL_PTR(address->memoryStor - HEADER_SIZE, address->header);
-  // TEST_ASSERT_EQUAL_PTR(address->memoryStor + address->lengthOfSpace, address->footer);
-  printf("Header address: %p\n", address->headerAddress);
+  TEST_ASSERT_EQUAL_PTR(headerPtr, address->headerAddress);
+  TEST_ASSERT_EQUAL_PTR(dataPtr, address->memoryAddress);
+  TEST_ASSERT_EQUAL_PTR(footerPtr, address->footerAddress);
 }
 
+void test_safeMalloc(){
+  safeMalloc(10);
+  // TEST_ASSERT_EQUAL(10, smalloc->lengthOfSpace);
+}
 
-void xtest_allocateAddress_pattern_(){
-  printf("###########################################");
+void test_allocateAddress_pattern_(){//test padding functionality
   MemoryDescription *address2 = allocateAddress(15);
   char *memory=address2->headerAddress;
   TEST_ASSERT_EQUAL_HEX('x', *memory);
@@ -213,12 +219,5 @@ void xtest_allocateAddress_pattern_(){
   TEST_ASSERT_EQUAL_HEX('Z', *(memory1+18));
   TEST_ASSERT_EQUAL_HEX('a', *(memory1+19));
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory1+20));
-
-  
-  
-  
-  
-  
-  
 }
 

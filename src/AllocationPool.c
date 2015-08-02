@@ -1,8 +1,17 @@
-#include <stdio.h>
-#include <malloc.h>
+#include <stdlib.h>
 #include "AllocationPool.h"
-#include "Smalloc.h"
+#include "MemoryDescription.h"
+#include "LinkedList.h"
 
+/**
+ *
+ *  HEAD -----+
+ *  TAIL -----|
+ *           \/
+ *          NULL
+ *
+ *  @brief create a struct node to as a head to point to the linkedlist.
+ */
 Allocation *createAllocationPool(){
   Allocation *alloc = (Allocation *)malloc(sizeof(Allocation));
   alloc->head = NULL;
@@ -11,14 +20,12 @@ Allocation *createAllocationPool(){
   return alloc;
 }
 
-MemoryDescription *createMemoryDescription(int lineNumber, int sizeDefined, char *fileName){
-  MemoryDescription *newMemDesc = (MemoryDescription *)malloc(sizeof(MemoryDescription));
-  newMemDesc->next = NULL;
-  newMemDesc->lineNumber = lineNumber;
-  newMemDesc->lengthOfSpace = sizeDefined;
-  newMemDesc->fileNameMemory = fileName;
-  newMemDesc->headerAddress = NULL;
-  newMemDesc->memoryAddress = NULL;
-  newMemDesc->footerAddress = NULL;
-  return newMemDesc;
-}
+// void listIncreaseOrder(MemoryDescription *ptr1, MemoryDescription *ptr2){
+  // Allocation *alloc = createAllocationPool();
+  // MemoryDescription *ptr1, *ptr2 = (MemoryDescription *)malloc(sizeof(MemoryDescription));
+  // if (ptr2->next->dataSize >= ptr1->dataSize){
+    // listAddLast(alloc, );
+  // }
+  // else
+     // listAddFirst();
+// }

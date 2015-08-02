@@ -2,14 +2,23 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include <string.h>
+#include "MemoryDescription.h"
+#include "LinkedList.h"
 #include "CException.h"
 #include "Smalloc.h"
 #include "AllocationPool.h"
 #include "ErrorObject.h"
 
+#include "Sfree.h"
+
+
+char *headerPtr, *dataPtr, *footerPtr;
+/**
+ *  @brief to store the addresses of headerPtr, dataPtr and footerPtr
+ *         to MemoryDescription
+ */
 MemoryDescription *allocateAddress(int size) {
   MemoryDescription *ptrMemory = malloc(sizeof(MemoryDescription));
-  char *headerPtr , *dataPtr , *footerPtr; 
 
   char *space = (char *)malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
 
@@ -67,29 +76,29 @@ void patternCheck(char *pointer){
   }
 }
 
-/**
- *  @breif link allocation and memory description
- */
-void listAdd(Allocation *alloc, MemoryDescription *newMemDesc){
-  if(alloc->head==NULL && alloc->tail==NULL){
-    alloc->head = newMemDesc;
-    alloc->tail = newMemDesc;
-  }
-  else{
-    alloc->tail->next = newMemDesc;
-    alloc->tail = newMemDesc;
-  }
-  alloc->noOfLinkedDesc++;
-}
+
 
 /**
  * @brief The main function for SafeMalloc.
  */
 
-void *_safeMalloc(int size, int lineNumber, char *fileName){
-  MemoryDescription *memDesc, *allocAddr;
-
-  memDesc = createMemoryDescription(lineNumber, size, fileName);
+void *_safeMalloc(int size, int lineNumber, char *fileName){//finux edited
+  MemoryDescription *tempMemDesc;
+  MemoryDescription *allocAddr;
+  
+  if(!(size>0)){
+    //throwError
+  }
+  
+  
   allocAddr = allocateAddress(size);
+  tempMemDesc = createMallocMemDesc(lineNumber, size, fileName,allocAddr);
+  addToList(tempMemDesc);
+  
+  
+
+ // printf("Size: %d\n", memDesc->dataSize);
+ // printf("Line number: %d\n", memDesc->mallocLine);
+ // printf("File name: %s\n", memDesc->mallocFile);
   
 }
