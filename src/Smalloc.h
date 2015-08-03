@@ -2,7 +2,9 @@
 #define Smalloc_H
 
 #include "AllocationPool.h"
+#include "LinkedList.h"
 
+#include "MemoryDescription.h"
 // #define DATA_SIZE   100
 #define HEADER_SIZE 21
 #define FOOTER_SIZE 21  //HEADER_SIZE AND FOOTER_SIZE MUST BE THE SAME!!

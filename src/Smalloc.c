@@ -2,11 +2,15 @@
 #include <stdlib.h>
 #include <malloc.h>
 #include <string.h>
+#include "MemoryDescription.h"
+#include "LinkedList.h"
 #include "CException.h"
 #include "Smalloc.h"
 #include "AllocationPool.h"
 #include "ErrorObject.h"
-#include "MemoryDescription.h"
+
+#include "Sfree.h"
+
 
 char *headerPtr, *dataPtr, *footerPtr;
 /**
@@ -25,6 +29,9 @@ MemoryDescription *allocateAddress(int size) {
   ptrMemory->headerAddress = headerPtr;
   ptrMemory->memoryAddress = dataPtr;
   ptrMemory->footerAddress = footerPtr;
+  
+  patternRepeat(5, CODE_PATTERN, headerPtr);//generate pattern for header and footer
+  patternRepeat(5, CODE_PATTERN, footerPtr);
 
   return ptrMemory;
 }
@@ -39,15 +46,14 @@ MemoryDescription *allocateAddress(int size) {
 void patternRepeat(int timesToCopy, char *pattern, char *pointer){
   char *temp;
   int i;
-  size_t slen = strlen(pattern);
-
-  // printf("%d\n",patternLength);
-  for ( i=0,temp = pointer ; i<timesToCopy; ++i, temp+=slen){
-    memcpy(temp, pattern, slen);
-
-    if((temp+slen)>pointer+FOOTER_SIZE) break;
+  int slen = strlen(pattern);
+  for ( i=0 ; i<(timesToCopy); i++){
+    temp=(pointer+(i*slen));
+   strcpy((temp),pattern);
+    if(((i+2)*slen)>FOOTER_SIZE)//if the pattern will overflow, break from loop
+      break;
   }
-  *temp = '\0';
+ // *temp = '\0';
 }
 
 /**
@@ -60,7 +66,6 @@ void patternCheck(char *pointer){
   patternRepeat(5,"xyZa",memory);
 
   checkingValue = strcmp(memory,pointer);
-
 
   if(checkingValue!=0){
     for(i=0;i<HEADER_SIZE;i++){
@@ -77,16 +82,23 @@ void patternCheck(char *pointer){
  * @brief The main function for SafeMalloc.
  */
 
-void *_safeMalloc(int size, int lineNumber, char *fileName){
-  MemoryDescription *memDesc, *allocAddr;
-
-  memDesc = createMallocMemDesc(lineNumber, size, fileName);
+void *_safeMalloc(int size, int lineNumber, char *fileName){//finux edited
+  MemoryDescription *tempMemDesc;
+  MemoryDescription *allocAddr;
+  
+  if(!(size>0)){
+    //throwError
+  }
+  
+  
   allocAddr = allocateAddress(size);
+  tempMemDesc = createMallocMemDesc(lineNumber, size, fileName,allocAddr);
+  addToList(tempMemDesc);
   
-  printf("Size: %d\n", memDesc->dataSize);
-  printf("Line number: %d\n", memDesc->mallocLine);
-  printf("File name: %s\n", memDesc->mallocFile);
   
-  // patternRepeat(5,CODE_PATTERN,headerPtr);
-  // patternRepeat(1,CODE_PATTERN,footerPtr);
+
+ // printf("Size: %d\n", memDesc->dataSize);
+ // printf("Line number: %d\n", memDesc->mallocLine);
+ // printf("File name: %s\n", memDesc->mallocFile);
+  
 }
