@@ -1,11 +1,10 @@
 #ifndef LinkedList_H
 #define LinkedList_H
 
-#include "AllocationPool.h"
+#include "MemoryDescription.h"
 
-void addToList(MemoryDescription *newMemDesc);//finux
-void listAddFirst(Allocation *alloc, MemoryDescription *newMemDesc);
-MemoryDescription* searchInAllocPool(char *targetAddress,MemoryDescription **prev);//finux
+void addToList(MemoryDescription *newMemDesc);
+MemoryDescription* searchInAllocPool(char *targetAddress,MemoryDescription **prev);
 MemoryDescription* moveBetweenList(char *dataAddress);
 
 #endif // LinkedList_H

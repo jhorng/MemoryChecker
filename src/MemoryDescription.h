@@ -13,8 +13,11 @@ struct MemoryDescription_t{
   int freeLine;
   char *freeFile;
 };
-MemoryDescription *createMallocMemDesc(int mallocLine, int sizeDefined, char *mallocFile,MemoryDescription *allocAddr);
+
+// MemoryDescription *createMallocMemDesc(int mallocLine, int sizeDefined, char *mallocFile);
+MemoryDescription *createMallocMemDesc(int mallocLine, int sizeDefined, char *mallocFile, MemoryDescription *allocAddr);
 MemoryDescription *createFreeMemDesc(int freeLine, char *freeFile);
+
 /* 
 typedef struct MemoryDescription_t AddrDescription;
 struct AddrDescription_t{

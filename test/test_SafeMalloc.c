@@ -47,7 +47,7 @@ void test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_mem
 
 
 void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory(){
-  char *memory = malloc(21);//dr poh pls dun remove this, this is essential for testing overflow
+  char *memory = malloc(21); // This is essential for testing overflow
   patternRepeat(6,"xyZa",memory);
   TEST_ASSERT_EQUAL_HEX('x', *memory);
   TEST_ASSERT_EQUAL_HEX('y', *(memory+1));
@@ -70,30 +70,9 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
   TEST_ASSERT_EQUAL_HEX('Z', *(memory+18));
   TEST_ASSERT_EQUAL_HEX('a', *(memory+19));
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory+20));
+  
+ 
 }
-
-/**
- *  HEAD -----+
- *  TAIL -----|
- *           \/
- *          NULL
- */
-/* void test_createAllocationPool_given_head_and_tail_both_return_NULL(){
-  Allocation *newAlloc = createAllocationPool();
-  TEST_ASSERT_NULL(newAlloc->head);
-  TEST_ASSERT_NULL(newAlloc->tail);
-  TEST_ASSERT_EQUAL(0, newAlloc->noOfLinkedDesc);
-} */
-
-/**
- *  To test the memoryDescription whether will work as the logic
- */
-/* void test_createMemoryDescription_given_next_and_memory_both_return_NULL(){
-  MemoryDescription *newMemDesc = createMemoryDescription(__LINE__, 500, __FILE__);
-  TEST_ASSERT_EQUAL(500, newMemDesc->lengthOfSpace);
-  TEST_ASSERT_NULL(newMemDesc->memoryAddress);
-  TEST_ASSERT_NULL(newMemDesc->next);
-} */
 
 /**
  *    ---------         ----------
@@ -105,9 +84,7 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
  *                                  -------
  */
 /* void test_linkedList_given_one_memory_description_should_return_one_memory_description(){
-  alloc = createAllocationPool();
-
-  listAdd(alloc, createMemoryDescription(__LINE__, 400, __FILE__));
+  addToList(createMemoryDescription(__LINE__, 400, __FILE__));
 
   TEST_ASSERT_EQUAL(400, alloc->head->lengthOfSpace);
   TEST_ASSERT_NULL(alloc->tail->next);
@@ -158,21 +135,15 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
 } */
 
 
-void test_the_function_of_allocateAddress(){
+// void test_the_function_of_allocateAddress(){
+  // MemoryDescription *address = allocateAddress(10);
+  // TEST_ASSERT_NOT_NULL(address);
+  // TEST_ASSERT_EQUAL_PTR(headerPtr, address->headerAddress);
+  // TEST_ASSERT_EQUAL_PTR(dataPtr, address->memoryAddress);
+  // TEST_ASSERT_EQUAL_PTR(footerPtr, address->footerAddress);
+// }
 
-  MemoryDescription *address = allocateAddress(10);
-  TEST_ASSERT_NOT_NULL(address);
-  TEST_ASSERT_EQUAL_PTR(headerPtr, address->headerAddress);
-  TEST_ASSERT_EQUAL_PTR(dataPtr, address->memoryAddress);
-  TEST_ASSERT_EQUAL_PTR(footerPtr, address->footerAddress);
-}
-
-void test_safeMalloc(){
-  safeMalloc(10);
-  // TEST_ASSERT_EQUAL(10, smalloc->lengthOfSpace);
-}
-
-void test_allocateAddress_pattern_(){//test padding functionality
+void xtest_allocateAddress_pattern_(){//test padding functionality
   MemoryDescription *address2 = allocateAddress(15);
   char *memory=address2->headerAddress;
   TEST_ASSERT_EQUAL_HEX('x', *memory);
@@ -197,7 +168,7 @@ void test_allocateAddress_pattern_(){//test padding functionality
   TEST_ASSERT_EQUAL_HEX('a', *(memory+19));
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory+20));
   
-   char *memory1=address2->footerAddress;
+  char *memory1=address2->footerAddress;
   TEST_ASSERT_EQUAL_HEX('x', *memory1);
   TEST_ASSERT_EQUAL_HEX('y', *(memory1+1));
   TEST_ASSERT_EQUAL_HEX('Z', *(memory1+2));
@@ -219,5 +190,9 @@ void test_allocateAddress_pattern_(){//test padding functionality
   TEST_ASSERT_EQUAL_HEX('Z', *(memory1+18));
   TEST_ASSERT_EQUAL_HEX('a', *(memory1+19));
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory1+20));
+  // free(memory);
 }
 
+void test_safeMalloc(){
+  safeMalloc(10);
+}

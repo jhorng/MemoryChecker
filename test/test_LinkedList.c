@@ -1,15 +1,11 @@
 #include <stdlib.h>
 #include "unity.h"
 #include "LinkedList.h"
-#include "AllocationPool.h"
 #include "MemoryDescription.h"
 
 void setUp(void) {}
 
 void tearDown(void) {}
-
-// set Allocation as global variable
-Allocation *alloc = NULL;
 
 /**
  *    ---------         ----------
@@ -20,17 +16,15 @@ Allocation *alloc = NULL;
  *                                   / NULL /
  *                                  -------
  */
-/* void test_listAddLast_given_one_memory_description_should_return_one_memory_description(){
-  alloc = createAllocationPool();
+// void test_listAddLast_given_one_memory_description_should_return_one_memory_description(){
+  // addToList(createMallocMemDesc(1234, 400, "C:/ThisFile.c"));
 
-  addToList(alloc, createMallocMemDesc(1234, 400, "C:/ThisFile.c"));
-
-  TEST_ASSERT_EQUAL(400, alloc->head->dataSize);
-  TEST_ASSERT_EQUAL(1234, alloc->head->mallocLine);
-  TEST_ASSERT_EQUAL("C:/ThisFile.c", alloc->head->mallocFile);
-  TEST_ASSERT_EQUAL(1, alloc->noOfLinkedDesc);
-  TEST_ASSERT_NULL(alloc->tail->next);
-} */
+  // TEST_ASSERT_EQUAL(400, alloc->head->dataSize);
+  // TEST_ASSERT_EQUAL(1234, alloc->head->mallocLine);
+  // TEST_ASSERT_EQUAL("C:/ThisFile.c", alloc->head->mallocFile);
+  // TEST_ASSERT_EQUAL(1, alloc->noOfLinkedDesc);
+  // TEST_ASSERT_NULL(alloc->tail->next);
+// }
 
 /**
  *    ---------         ----------        ----------
