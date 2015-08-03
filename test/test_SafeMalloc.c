@@ -143,7 +143,7 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
   // TEST_ASSERT_EQUAL_PTR(footerPtr, address->footerAddress);
 // }
 
-void xtest_allocateAddress_pattern_(){//test padding functionality
+void test_allocateAddress_pattern_(){//test padding functionality
   MemoryDescription *address2 = allocateAddress(15);
   char *memory=address2->headerAddress;
   TEST_ASSERT_EQUAL_HEX('x', *memory);
@@ -190,7 +190,7 @@ void xtest_allocateAddress_pattern_(){//test padding functionality
   TEST_ASSERT_EQUAL_HEX('Z', *(memory1+18));
   TEST_ASSERT_EQUAL_HEX('a', *(memory1+19));
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory1+20));
-  // free(memory);
+  free(address2);
 }
 
 void test_safeMalloc(){
