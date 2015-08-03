@@ -20,9 +20,9 @@ MemoryDescription *createMallocMemDesc(int mallocLine, int sizeDefined, char *ma
   // mallocMemDesc->footerAddress = NULL;
   mallocMemDesc->freeLine      = 0;
   mallocMemDesc->freeFile      = NULL;
-  printf("header: %p\n",allocAddr->headerAddress);
+/*   printf("cmheader: %p\n",allocAddr->headerAddress);
   printf("memory:%p\n",allocAddr->memoryAddress);
-  printf("footer:%p\n",allocAddr->footerAddress);
+  printf("footer:%p\n",allocAddr->footerAddress); */
   return mallocMemDesc;
 }
 

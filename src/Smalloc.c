@@ -27,9 +27,9 @@ MemoryDescription *allocateAddress(int size) {
   ptrMemory->memoryAddress = dataPtr;
   ptrMemory->footerAddress = footerPtr;
   
-  printf("header = %p\n", ptrMemory->headerAddress);
+/*   printf("aaheader = %p\n", ptrMemory->headerAddress);
   printf("memory = %p\n", ptrMemory->memoryAddress);
-  printf("footer = %p\n", ptrMemory->footerAddress);
+  printf("footer = %p\n", ptrMemory->footerAddress); */
   
   patternRepeat(5, CODE_PATTERN, headerPtr);//generate pattern for header and footer
   patternRepeat(5, CODE_PATTERN, footerPtr);
@@ -95,7 +95,7 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
   
   allocAddr = allocateAddress(size);
   memDesc = createMallocMemDesc(lineNumber, size, fileName, allocAddr);
-  // addToList(memDesc);
+   addToList(memDesc);
   
   
 
