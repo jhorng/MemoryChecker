@@ -25,7 +25,8 @@ void test_createAllocationPool_given_head_and_tail_both_return_NULL(){
 
 // void test_check_listIncreaseOrder_given_size_100_and_200_should_return_100_then_200(){
   // alloc=createAllocationPool();
-  // listIncreaseOrder(100, 200);
+  // listIncreaseOrder(100);
+  // listIncreaseOrder(200);
   // TEST_ASSERT_EQUAL(100, alloc->head->dataSize);
   // TEST_ASSERT_EQUAL(200, alloc->tail->dataSize);
 // }

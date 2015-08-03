@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "AllocationPool.h"
 #include "MemoryDescription.h"
@@ -20,12 +21,22 @@ Allocation *createAllocationPool(){
   return alloc;
 }
 
-// void listIncreaseOrder(MemoryDescription *ptr1, MemoryDescription *ptr2){
+/**
+ *  @brief listIncreaseOrder() will arrange the list in according 
+ *         to the size assigned by users.
+ */
+// void listIncreaseOrder(int size){
   // Allocation *alloc = createAllocationPool();
-  // MemoryDescription *ptr1, *ptr2 = (MemoryDescription *)malloc(sizeof(MemoryDescription));
-  // if (ptr2->next->dataSize >= ptr1->dataSize){
-    // listAddLast(alloc, );
+  // MemoryDescription *ptrMemDesc = (MemoryDescription *)malloc(sizeof(MemoryDescription));
+  // if (alloc->head->next == NULL){
+    // printf("End of linked list!\n");
   // }
-  // else
-     // listAddFirst();
+  // else {
+    // if (size >= ptrMemDesc->dataSize){
+      // listAddLast(alloc, ptrMemDesc);
+    // }
+    // else {
+      // listAddFirst(alloc, ptrMemDesc);
+    // }
+  // }
 // }
