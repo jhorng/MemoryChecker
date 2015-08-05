@@ -3,12 +3,15 @@
 #include "LinkedList.h"
 #include "MemoryDescription.h"
 #include "Smalloc.h"
+#include "CException.h"
+#include "ErrorObject.h"
 
 MemoryDescription *allocationHead = NULL;
 MemoryDescription *allocationTail = NULL;
 
 MemoryDescription *freeHead = NULL;
 MemoryDescription *freeTail = NULL;
+
 
 /**
  *
@@ -62,14 +65,14 @@ MemoryDescription *searchInAllocPool(char *targetAddress, MemoryDescription **pr
   }
 }
 
-MemoryDescription* moveBetweenList(char *dataAddress){
+MemoryDescription* moveBetweenList(char *dataAddress, char *fileName, int lineNumber){
   MemoryDescription *deletionPtr = NULL;
   MemoryDescription *prevPtr     = NULL;
 
   deletionPtr = searchInAllocPool(dataAddress, &prevPtr);
   if(deletionPtr == NULL)
-    // throwError(ERR_FREE_INVALID_LOCATION,"File %s:line %d: No such location to free",fileName,lineNumber);
-  if(freeHead == NULL){ //passing to free pool
+    throwError(ERR_FREE_INVALID_LOCATION,"File %s:line %d: No such location to free",fileName,lineNumber);
+  if(freeHead == NULL){ //link to free pool
 		freeHead = deletionPtr;
     freeTail = deletionPtr;
   }
@@ -80,8 +83,11 @@ MemoryDescription* moveBetweenList(char *dataAddress){
 
   if(prevPtr != NULL)//delete maneuver
     prevPtr->next = deletionPtr->next;
-
-  if(deletionPtr == allocationTail){
+   
+  if(allocationHead==deletionPtr &&allocationTail==deletionPtr){
+    allocationHead=allocationTail=NULL;
+  }
+  else if(deletionPtr == allocationTail){
     allocationTail = prevPtr;
   }
   else if(deletionPtr == allocationHead){

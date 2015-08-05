@@ -3,6 +3,7 @@
 #include "LinkedList.h"
 #include "Smalloc.h"
 #include "MemoryDescription.h"
+#include "ErrorObject.h"
 
 void setUp(void){}
 
