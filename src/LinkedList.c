@@ -71,7 +71,7 @@ MemoryDescription* moveBetweenList(char *dataAddress, char *fileName, int lineNu
 
   deletionPtr = searchInAllocPool(dataAddress, &prevPtr);
   if(deletionPtr == NULL)
-    throwError(ERR_FREE_INVALID_LOCATION,"File %s:line %d: No such location to free",fileName,lineNumber);
+    throwError(ERR_FREE_INVALID_LOCATION,"File %s:line %d: No such location to free\n",fileName,lineNumber);
   if(freeHead == NULL){ //link to free pool
 		freeHead = deletionPtr;
     freeTail = deletionPtr;
@@ -97,4 +97,11 @@ MemoryDescription* moveBetweenList(char *dataAddress, char *fileName, int lineNu
   free(deletionPtr);
   deletionPtr = NULL;
   return freeTail;
+}
+
+MemoryDescription* passAllocPointer(){
+  return allocationHead;
+}
+MemoryDescription* passFreePointer(){
+  return freeHead;
 }

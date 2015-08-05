@@ -194,7 +194,7 @@ void test_allocateAddress_pattern_(){//test padding functionality
   free(address2);
 }
 
-void test_safeMalloc(){
+void xtest_safeMalloc(){
   safeMalloc(10);
 }
 

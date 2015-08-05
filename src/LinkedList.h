@@ -11,5 +11,7 @@
 void addToList(MemoryDescription *newMemDesc);
 MemoryDescription* searchInAllocPool(char *targetAddress,MemoryDescription **prev);
 MemoryDescription* moveBetweenList(char *dataAddress, char *fileName, int lineNumber);
+MemoryDescription* passAllocPointer();
+MemoryDescription* passFreePointer();
 
 #endif // LinkedList_H

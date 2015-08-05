@@ -22,11 +22,11 @@ void *_safeFree(char *dataAddress, int lineNumber, char *fileName){
     iFooter = patternCheck(freePtr->footerAddress, FOOTER_SIZE, CODE_PATTERN);
   
     if(iHeader != PASS_TICKET){
-      printf("File:%p:%d: note: Memory's header defected when freed@column:%d",fileName,lineNumber,iHeader);   
+      printf("File:%p:%d: note: Memory's header integrity violated when freed@column:%d",fileName,lineNumber,iHeader);   
     }
   
     if(iFooter != PASS_TICKET){
-      printf("File:%p:%d: note: Memory's footer defected when freed@column:%d",fileName,lineNumber,iFooter);   
+      printf("File:%p:%d: note: Memory's footer integrity violated when freed@column:%d",fileName,lineNumber,iFooter);   
     }
   
   }Catch(err){
