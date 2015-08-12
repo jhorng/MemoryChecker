@@ -93,13 +93,9 @@ int patternCheck(char *pointer, int sizeNeedCheck, char *pattern){
  *        throwError is to prevent users enter unwanted "size" when using safeMalloc().
  */
 void *_safeMalloc(int size, int lineNumber, char *fileName){
-<<<<<<< HEAD
+
   MemoryDescription *memDesc = (MemoryDescription *)malloc(sizeof(MemoryDescription)); 
   MemoryDescription *allocAddr =(MemoryDescription *)malloc(sizeof(MemoryDescription));
-=======
-  MemoryDescription *memDesc = NULL;//(MemoryDescription *)malloc(sizeof(MemoryDescription)); 
-  MemoryDescription *allocAddr = NULL;//(MemoryDescription *)malloc(sizeof(MemoryDescription));
->>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
   
   ///////////////////// pending
   // if(!(size>0)){

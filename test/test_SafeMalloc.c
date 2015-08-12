@@ -151,7 +151,7 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
 // }
 
 void test_safeMalloc(){
- char *memory3=safeMalloc(10);
+ //char *memory3=safeMalloc(10);
 }
 
 void test_allocateAddress_pattern_(){//test padding functionality
@@ -204,11 +204,6 @@ void test_allocateAddress_pattern_(){//test padding functionality
   free(address2);
 } 
 
-<<<<<<< HEAD
-=======
-void xtest_safeMalloc(){
-  safeMalloc(10);
-}
 
 void test_5th_char_not_same_should_return_5(){
   
@@ -245,4 +240,3 @@ void test_patterncheck_20xA_5th_not_same_return_5(){
   
   TEST_ASSERT_EQUAL(5, i);
   }
->>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3

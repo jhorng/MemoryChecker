@@ -11,23 +11,8 @@
 
 void *_safeFree(char *dataAddress, int lineNumber, char *fileName){
   MemoryDescription *freePtr;
-<<<<<<< HEAD
   ErrorObject *err; 
-
-  Try{//bad memory access
-  //freePtr=moveBetweenList(dataAddress, lineNumber, fileName);
-  }Catch(err){
-   printf("Error: %s\n", err->errorMsg);
-   freeError(err);
-  }
   
-  freePtr->freeLine      =lineNumber;
-  freePtr->freeFile      =fileName;
-  patternRepeat(freePtr->dataSize, "#", freePtr->memoryAddress);
-  
-  
-=======
-  ErrorObject *err;
   int iHeader=-1,iFooter=-1;
   Try{
     freePtr=moveBetweenList(dataAddress, fileName, lineNumber);
@@ -51,5 +36,4 @@ void *_safeFree(char *dataAddress, int lineNumber, char *fileName){
     freeError(err);
   }
 
->>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
 }

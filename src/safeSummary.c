@@ -6,10 +6,10 @@
 #include "Sfree.h"
 #include "ErrorObject.h"
 #include "MemoryDescription.h"
+#include "Smalloc.h"
 
 
 void safeSummary(){
-<<<<<<< HEAD
   
 /*   
 MemoryDescription *allocationHead = NULL;
@@ -17,24 +17,16 @@ MemoryDescription *allocationTail = NULL;
 
 MemoryDescription *freeHead = NULL;
 MemoryDescription *freeTail = NULL; */
-=======
+
   MemoryDescription *nomadPtr4Alloc, *nomadPtr4Free;
   
-  AllocPtr = passAllocPointer();
-  FreePtr  = passFreePointer();
+  nomadPtr4Alloc = passAllocPointer();
+  nomadPtr4Free  = passFreePointer();
   
   
-  roamingChecker(AllocPtr);
-  roamingChecker(FreePtr);
+  roamingChecker(nomadPtr4Alloc);
+  roamingChecker(nomadPtr4Free);
 
->>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
-  //if(allocationHead==NULL &&allocationTail==NULL){
-    
- // }
-  
-<<<<<<< HEAD
-  
-=======
 }
 
 void roamingChecker(MemoryDescription *nomadPtr){
@@ -46,20 +38,20 @@ void roamingChecker(MemoryDescription *nomadPtr){
     
     
     if(nomadPtr->freeLine == 0){
-      printf("File:%p:%d: note: Memory malloc-ed pending to be free.\n",fileName,lineNumber);   
+      printf("File:%p:%d: note: Memory malloc-ed pending to be free.\n",nomadPtr->mallocFile,nomadPtr->mallocLine);   
     }
     else{
       resultOfSpace  = patternCheck( nomadPtr->memoryAddress, nomadPtr->dataSize, "#");
       if(resultOfSpace != PASS_TICKET){
-        printf("File:%p:%d: note: Memory's datapad integrity violated @column:%d",nomadPtr->fileName,nomadPtr->lineNumber,resultOfSpace); 
+        printf("File:%p:%d: note: Memory's datapad integrity violated @column:%d",nomadPtr->mallocFile,nomadPtr->mallocLine,resultOfSpace); 
       }
     }
     
   if(resultOfHeader != PASS_TICKET){
-     printf("File:%p:%d: note: Memory's header integrity violated @column:%d",nomadPtr->fileName,nomadPtr->lineNumber,resultOfHeader);   
+     printf("File:%p:%d: note: Memory's header integrity violated @column:%d",nomadPtr->mallocFile,nomadPtr->mallocLine,resultOfHeader);   
     }
   if(resultOfFooter != PASS_TICKET){
-     printf("File:%p:%d: note: Memory's footer integrity violated @column:%d",nomadPtr->fileName,nomadPtr->lineNumber,resultOfFooter);   
+     printf("File:%p:%d: note: Memory's footer integrity violated @column:%d",nomadPtr->mallocFile,nomadPtr->mallocLine,resultOfFooter);   
     }
       
   
@@ -67,7 +59,6 @@ void roamingChecker(MemoryDescription *nomadPtr){
   
     
   }
->>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
   
   
   

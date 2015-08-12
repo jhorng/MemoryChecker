@@ -3,10 +3,7 @@
 #include "LinkedList.h"
 #include "MemoryDescription.h"
 #include "Smalloc.h"
-<<<<<<< HEAD
-=======
 #include "CException.h"
->>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
 #include "ErrorObject.h"
 
 MemoryDescription *allocationHead = NULL;
@@ -71,21 +68,14 @@ MemoryDescription *searchInAllocPool(char *targetAddress, MemoryDescription **pr
   }
 }
 
-<<<<<<< HEAD
-MemoryDescription* moveBetweenList(char *dataAddress, int lineNumber, char* fileName){
-=======
 MemoryDescription* moveBetweenList(char *dataAddress, char *fileName, int lineNumber){
->>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
   MemoryDescription *deletionPtr = NULL;
   MemoryDescription *prevPtr     = NULL;
 
   deletionPtr = searchInAllocPool(dataAddress, &prevPtr);
   if(deletionPtr == NULL)
-<<<<<<< HEAD
-     throwError(ERR_FREE_INVALID_LOCATION,"File %s:line %d: No such location to free",fileName,lineNumber);
-=======
+
     throwError(ERR_FREE_INVALID_LOCATION,"File %s:line %d: No such location to free\n",fileName,lineNumber);
->>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
   if(freeHead == NULL){ //link to free pool
 		freeHead = deletionPtr;
     freeTail = deletionPtr;
