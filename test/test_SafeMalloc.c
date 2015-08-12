@@ -151,55 +151,28 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
 // }
 
 void test_safeMalloc(){
- //char *memory3=safeMalloc(10);
+  //char *memory3=safeMalloc(10);
 }
 
 void test_allocateAddress_pattern_(){//test padding functionality
   MemoryDescription *address2 = allocateAddress(15);
   char *memory=address2->headerAddress;
-  TEST_ASSERT_EQUAL_HEX('x', *memory);
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+1));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+2));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+3));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+4));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+5));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+6));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+7));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+8));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+9));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+10));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+11));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+12));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+13));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+14));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+15));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+16));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+17));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+18));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+19));
+  int i=0;
+  for(i=0;i<20;i=i+4){
+  TEST_ASSERT_EQUAL_HEX('x', *(memory+i));
+  TEST_ASSERT_EQUAL_HEX('y', *(memory+i+1));
+  TEST_ASSERT_EQUAL_HEX('Z', *(memory+i+2));
+  TEST_ASSERT_EQUAL_HEX('a', *(memory+i+3));
+}
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory+20));
   
   char *memory1=address2->footerAddress;
-  TEST_ASSERT_EQUAL_HEX('x', *memory1);
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+1));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+2));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+3));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory1+4));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+5));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+6));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+7));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory1+8));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+9));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+10));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+11));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory1+12));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+13));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+14));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+15));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory1+16));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+17));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+18));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+19));
+  for(i=0;i<20;i=i+4){
+  TEST_ASSERT_EQUAL_HEX('x', *(memory1+i));
+  TEST_ASSERT_EQUAL_HEX('y', *(memory1+i+1));
+  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+i+2));
+  TEST_ASSERT_EQUAL_HEX('a', *(memory1+i+3));
+}
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory1+20));
   free(address2);
 } 
