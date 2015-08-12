@@ -4,7 +4,10 @@
 #include "unity.h"
 #include "Smalloc.h"
 #include "MemoryDescription.h"
+#include "ErrorObject.h"
 #include "LinkedList.h"
+#include "ErrorObject.h"
+
 
 extern char *headerPtr, *dataPtr, *footerPtr;
 
@@ -16,6 +19,7 @@ void test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory
   char *memory = malloc(20);
   patternRepeat(1,"x",memory);
   TEST_ASSERT_EQUAL_HEX('x', *memory);
+  free(memory);
 }
 
 void test_repeatPattern_given_x_pattern_with_2_times_should_have_xx_in_the_memory(){
@@ -25,6 +29,7 @@ void test_repeatPattern_given_x_pattern_with_2_times_should_have_xx_in_the_memor
   TEST_ASSERT_EQUAL_HEX('x', *(memory+1));
   TEST_ASSERT_EQUAL_HEX('x', *(memory+2));
   TEST_ASSERT_EQUAL_HEX('x', *(memory+3));
+    free(memory);
 }
 
 void test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in_the_memory(){
@@ -34,6 +39,7 @@ void test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in_the_me
   TEST_ASSERT_EQUAL_HEX('y', *(memory+1));
   TEST_ASSERT_EQUAL_HEX('x', *(memory+2));
   TEST_ASSERT_EQUAL_HEX('y', *(memory+3));
+  free(memory);
 }
 
 void test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_memory(){
@@ -43,6 +49,7 @@ void test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_mem
   TEST_ASSERT_EQUAL_HEX('y', *(memory+1));
   TEST_ASSERT_EQUAL_HEX('Z', *(memory+2));
   TEST_ASSERT_EQUAL_HEX('a', *(memory+3));
+  free(memory);
 }
 
 
@@ -70,8 +77,8 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
   TEST_ASSERT_EQUAL_HEX('Z', *(memory+18));
   TEST_ASSERT_EQUAL_HEX('a', *(memory+19));
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory+20));
+  free(memory);
   
- 
 }
 
 /**
@@ -143,6 +150,10 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
   // TEST_ASSERT_EQUAL_PTR(footerPtr, address->footerAddress);
 // }
 
+void test_safeMalloc(){
+ //char *memory3=safeMalloc(10);
+}
+
 void test_allocateAddress_pattern_(){//test padding functionality
   MemoryDescription *address2 = allocateAddress(15);
   char *memory=address2->headerAddress;
@@ -191,8 +202,41 @@ void test_allocateAddress_pattern_(){//test padding functionality
   TEST_ASSERT_EQUAL_HEX('a', *(memory1+19));
   TEST_ASSERT_EQUAL_HEX(NULL, *(memory1+20));
   free(address2);
-}
+} 
 
-void test_safeMalloc(){
-  safeMalloc(10);
-}
+
+void test_5th_char_not_same_should_return_5(){
+  
+  char pointer[21]="xyZa5yZaxyZaxyZaxyZa";
+  char i=-2;
+  i=patternCheck(pointer, 21, CODE_PATTERN);
+  
+  TEST_ASSERT_EQUAL(5, i);
+  }
+
+void test_patterncheck_no_problem_return_neg20(){
+  
+  char pointer[21]="xyZaxyZaxyZaxyZaxyZa";
+  char i=-2;
+  i=patternCheck(pointer, 21, CODE_PATTERN);
+  
+  TEST_ASSERT_EQUAL(-20, i);
+  }
+
+void test_patterncheck_20xA_no_problem_return_neg20(){
+  
+  char pointer[21]="AAAAAAAAAAAAAAAAAAAA";
+  char i=-2;
+  i=patternCheck(pointer, 21, "A");
+  
+  TEST_ASSERT_EQUAL(-20, i);
+  }
+
+void test_patterncheck_20xA_5th_not_same_return_5(){
+  
+  char pointer[21]="AAAA5AAAAAAAAAAAAAAA";
+  char i=-2;
+  i=patternCheck(pointer, 21, "A");
+  
+  TEST_ASSERT_EQUAL(5, i);
+  }

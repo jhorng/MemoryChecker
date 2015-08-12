@@ -61,20 +61,29 @@ void patternRepeat(int timesToCopy, char *pattern, char *pointer){
  *  @brief check repetitive patterns in the memory
  *  @arg
  */
-void patternCheck(char *pointer){
-  int checkingValue, i=-1;
-  char memory[HEADER_SIZE];
-  patternRepeat(5,"xyZa",memory);
-
-  checkingValue = strcmp(memory,pointer);
-
-  if(checkingValue!=0){
-    for(i=0;i<HEADER_SIZE;i++){
-      checkingValue=strncmp(memory,pointer,i);
-      if(checkingValue!=0)
-        break;
+int patternCheck(char *pointer, int sizeNeedCheck, char *pattern){
+  int checkResult, numberOfDuplication,i=0;
+  char tempMemory[sizeNeedCheck];
+  
+  if(pattern ==CODE_PATTERN)
+    numberOfDuplication =5;
+  else
+    numberOfDuplication =sizeNeedCheck;
+  
+  patternRepeat(numberOfDuplication, pattern, tempMemory);
+  
+  checkResult = strcmp(tempMemory,pointer);
+  
+  
+  if(checkResult !=0){
+    for(i=0; i<sizeNeedCheck; i++){
+       checkResult = strncmp(tempMemory, pointer, i);
+       if(checkResult != 0)
+         return i;
     }
   }
+  
+  return PASS_TICKET;//-20 value means all pass.
 }
 
 
@@ -84,8 +93,9 @@ void patternCheck(char *pointer){
  *        throwError is to prevent users enter unwanted "size" when using safeMalloc().
  */
 void *_safeMalloc(int size, int lineNumber, char *fileName){
+
   MemoryDescription *memDesc = (MemoryDescription *)malloc(sizeof(MemoryDescription)); 
-  MemoryDescription *allocAddr = (MemoryDescription *)malloc(sizeof(MemoryDescription));
+  MemoryDescription *allocAddr =(MemoryDescription *)malloc(sizeof(MemoryDescription));
   
   ///////////////////// pending
   // if(!(size>0)){
@@ -95,12 +105,12 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
   
   allocAddr = allocateAddress(size);
   memDesc = createMallocMemDesc(lineNumber, size, fileName, allocAddr);
-   addToList(memDesc);
+ // addToList(memDesc);
   
   
 
- printf("Size: %d\n", memDesc->dataSize);
- printf("Line number: %d\n", memDesc->mallocLine);
- printf("File name: %s\n", memDesc->mallocFile);
- // return allocAddr->memoryAddress;
+ //printf("Size: %d\n", memDesc->dataSize);
+// printf("Line number: %d\n", memDesc->mallocLine);
+// printf("File name: %s\n", memDesc->mallocFile);
+ return allocAddr->memoryAddress;
 }
