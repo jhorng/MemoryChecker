@@ -4,7 +4,10 @@
 #include "Smalloc.h"
 #include "MemoryDescription.h"
 #include "ErrorObject.h"
+<<<<<<< HEAD
 #include "CException.h"
+=======
+>>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
 
 void setUp(void){}
 

@@ -6,9 +6,12 @@
 #include "LinkedList.h"
 #include "CException.h"
 
+#include "CException.h"
+
 
 void *_safeFree(char *dataAddress, int lineNumber, char *fileName){
   MemoryDescription *freePtr;
+<<<<<<< HEAD
   ErrorObject *err; 
 
   Try{//bad memory access
@@ -23,4 +26,30 @@ void *_safeFree(char *dataAddress, int lineNumber, char *fileName){
   patternRepeat(freePtr->dataSize, "#", freePtr->memoryAddress);
   
   
+=======
+  ErrorObject *err;
+  int iHeader=-1,iFooter=-1;
+  Try{
+    freePtr=moveBetweenList(dataAddress, fileName, lineNumber);
+  //no error will do below designation
+    freePtr->freeLine      =lineNumber;
+    freePtr->freeFile      =fileName;
+    patternRepeat(freePtr->dataSize, "#", freePtr->memoryAddress);
+    iHeader = patternCheck(freePtr->headerAddress, HEADER_SIZE, CODE_PATTERN);
+    iFooter = patternCheck(freePtr->footerAddress, FOOTER_SIZE, CODE_PATTERN);
+  
+    if(iHeader != PASS_TICKET){
+      printf("File:%p:%d: note: Memory's header integrity violated when freed@column:%d",fileName,lineNumber,iHeader);   
+    }
+  
+    if(iFooter != PASS_TICKET){
+      printf("File:%p:%d: note: Memory's footer integrity violated when freed@column:%d",fileName,lineNumber,iFooter);   
+    }
+  
+  }Catch(err){
+    printf("Error: %s\n", err->errorMsg);
+    freeError(err);
+  }
+
+>>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
 }

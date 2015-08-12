@@ -4,6 +4,10 @@
 #include "MemoryDescription.h"
 #include "ErrorObject.h"
 
+#include "ErrorObject.h"
+#include "CException.h"
+
+
 void setUp(void) {}
 
 void tearDown(void) {}

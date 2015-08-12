@@ -2,6 +2,10 @@
 #include "MemoryDescription.h"
 #include "LinkedList.h"
 #include "ErrorObject.h"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
 void setUp(void) {}
 
 void tearDown(void) {}

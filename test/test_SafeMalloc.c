@@ -4,6 +4,7 @@
 #include "unity.h"
 #include "Smalloc.h"
 #include "MemoryDescription.h"
+#include "ErrorObject.h"
 #include "LinkedList.h"
 #include "ErrorObject.h"
 
@@ -203,3 +204,45 @@ void test_allocateAddress_pattern_(){//test padding functionality
   free(address2);
 } 
 
+<<<<<<< HEAD
+=======
+void xtest_safeMalloc(){
+  safeMalloc(10);
+}
+
+void test_5th_char_not_same_should_return_5(){
+  
+  char pointer[21]="xyZa5yZaxyZaxyZaxyZa";
+  char i=-2;
+  i=patternCheck(pointer, 21, CODE_PATTERN);
+  
+  TEST_ASSERT_EQUAL(5, i);
+  }
+
+void test_patterncheck_no_problem_return_neg20(){
+  
+  char pointer[21]="xyZaxyZaxyZaxyZaxyZa";
+  char i=-2;
+  i=patternCheck(pointer, 21, CODE_PATTERN);
+  
+  TEST_ASSERT_EQUAL(-20, i);
+  }
+
+void test_patterncheck_20xA_no_problem_return_neg20(){
+  
+  char pointer[21]="AAAAAAAAAAAAAAAAAAAA";
+  char i=-2;
+  i=patternCheck(pointer, 21, "A");
+  
+  TEST_ASSERT_EQUAL(-20, i);
+  }
+
+void test_patterncheck_20xA_5th_not_same_return_5(){
+  
+  char pointer[21]="AAAA5AAAAAAAAAAAAAAA";
+  char i=-2;
+  i=patternCheck(pointer, 21, "A");
+  
+  TEST_ASSERT_EQUAL(5, i);
+  }
+>>>>>>> 4abb9c83d10efeff51e18ec9ae9ffe3f799009a3
