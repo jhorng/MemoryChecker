@@ -12,12 +12,12 @@ MemoryDescription *createMallocMemDesc(int mallocLine, int sizeDefined, char *ma
   mallocMemDesc->mallocLine    = mallocLine;
   mallocMemDesc->dataSize      = sizeDefined;
   mallocMemDesc->mallocFile    = mallocFile;
-  mallocMemDesc->headerAddress = allocAddr->headerAddress;
-  mallocMemDesc->memoryAddress = allocAddr->memoryAddress;
-  mallocMemDesc->footerAddress = allocAddr->footerAddress;  
-  // mallocMemDesc->headerAddress = NULL;
-  // mallocMemDesc->memoryAddress = NULL;
-  // mallocMemDesc->footerAddress = NULL;
+ // mallocMemDesc->headerAddress = allocAddr->headerAddress;
+ // mallocMemDesc->memoryAddress = allocAddr->memoryAddress;
+ // mallocMemDesc->footerAddress = allocAddr->footerAddress;  
+   mallocMemDesc->headerAddress = NULL;
+   mallocMemDesc->memoryAddress = NULL;
+  mallocMemDesc->footerAddress = NULL;
   mallocMemDesc->freeLine      = 0;
   mallocMemDesc->freeFile      = NULL;
 /*   printf("cmheader: %p\n",allocAddr->headerAddress);

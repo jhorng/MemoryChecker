@@ -2,6 +2,7 @@
 #include "ErrorObject.h"
 #include "CException.h"
 #include "Sfree.h"
+#include <stdarg.h>
 
 void throwError(ErrorCode errCode,char *msg , ...){
   ErrorObject *errorObj=malloc(sizeof(ErrorObject));

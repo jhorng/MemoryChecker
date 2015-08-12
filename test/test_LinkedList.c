@@ -2,6 +2,7 @@
 #include "unity.h"
 #include "LinkedList.h"
 #include "MemoryDescription.h"
+#include "ErrorObject.h"
 
 void setUp(void) {}
 
@@ -76,3 +77,6 @@ void test_addToList_given_1_and_2_should_return_2_then_1(){
   TEST_ASSERT_EQUAL("C:/Allocation.c", alloc->tail->mallocFile);
   TEST_ASSERT_EQUAL(2, alloc->noOfLinkedDesc);
 } */
+
+
+

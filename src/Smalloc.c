@@ -85,7 +85,7 @@ void patternCheck(char *pointer){
  */
 void *_safeMalloc(int size, int lineNumber, char *fileName){
   MemoryDescription *memDesc = (MemoryDescription *)malloc(sizeof(MemoryDescription)); 
-  MemoryDescription *allocAddr = (MemoryDescription *)malloc(sizeof(MemoryDescription));
+  MemoryDescription *allocAddr =(MemoryDescription *)malloc(sizeof(MemoryDescription));
   
   ///////////////////// pending
   // if(!(size>0)){
@@ -95,12 +95,12 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
   
   allocAddr = allocateAddress(size);
   memDesc = createMallocMemDesc(lineNumber, size, fileName, allocAddr);
-   addToList(memDesc);
+ // addToList(memDesc);
   
   
 
- printf("Size: %d\n", memDesc->dataSize);
- printf("Line number: %d\n", memDesc->mallocLine);
- printf("File name: %s\n", memDesc->mallocFile);
- // return allocAddr->memoryAddress;
+ //printf("Size: %d\n", memDesc->dataSize);
+// printf("Line number: %d\n", memDesc->mallocLine);
+// printf("File name: %s\n", memDesc->mallocFile);
+ return allocAddr->memoryAddress;
 }

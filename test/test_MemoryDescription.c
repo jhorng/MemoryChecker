@@ -1,7 +1,7 @@
 #include "unity.h"
 #include "MemoryDescription.h"
 #include "LinkedList.h"
-
+#include "ErrorObject.h"
 void setUp(void) {}
 
 void tearDown(void) {}
