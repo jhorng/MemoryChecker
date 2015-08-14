@@ -35,5 +35,8 @@ void *_safeFree(char *dataAddress, int lineNumber, char *fileName){
     printf("Error: %s\n", err->errorMsg);
     freeError(err);
   }
+  
+  
+  
 
 }

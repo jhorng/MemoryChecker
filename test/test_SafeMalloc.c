@@ -19,64 +19,27 @@ void test_repeatPattern_given_x_pattern_with_1_times_should_have_x_in_the_memory
   char *memory = malloc(20);
   patternRepeat(1,"x",memory);
   TEST_ASSERT_EQUAL_HEX('x', *memory);
+  TEST_ASSERT_EQUAL_HEX(NULL, *(memory+1));
   free(memory);
 }
 
 void test_repeatPattern_given_x_pattern_with_2_times_should_have_xx_in_the_memory(){
   char *memory = malloc(20);
-  patternRepeat(2,"xx",memory);
-  TEST_ASSERT_EQUAL_HEX('x', *memory);
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+1));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+2));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+3));
+  patternRepeat(2,CODE_PATTERN,memory);
+  TEST_ASSERT_EQUAL_HEX('#', *memory);
+  TEST_ASSERT_EQUAL_HEX('#', *(memory+1));
+  TEST_ASSERT_EQUAL_HEX(NULL, *(memory+2));
     free(memory);
 }
 
-void test_repeatPattern_given_xy_pattern_with_2_times_should_have_xyxy_in_the_memory(){
-  char *memory = malloc(20);
-  patternRepeat(2,"xy",memory);
-  TEST_ASSERT_EQUAL_HEX('x', *memory);
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+1));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+2));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+3));
-  free(memory);
-}
-
-void test_repeatPattern_given_xyZa_1_time_should_have_xyZa_1time_only_in_the_memory(){
-  char *memory = malloc(20);
-  patternRepeat(1,"xyZa",memory);
-  TEST_ASSERT_EQUAL_HEX('x', *memory);
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+1));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+2));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+3));
-  free(memory);
-}
-
-
-void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_memory(){
+void test_repeatPattern_given_X_HEADER_SIZE_should_have_21_5times_only_in_the_memory(){
   char *memory = malloc(21); // This is essential for testing overflow
-  patternRepeat(6,"xyZa",memory);
-  TEST_ASSERT_EQUAL_HEX('x', *memory);
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+1));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+2));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+3));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+4));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+5));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+6));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+7));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+8));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+9));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+10));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+11));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+12));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+13));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+14));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+15));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+16));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+17));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+18));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+19));
-  TEST_ASSERT_EQUAL_HEX(NULL, *(memory+20));
+  int i=0;
+  patternRepeat(HEADER_SIZE,CODE_PATTERN,memory);
+  for(i=0;i<21;i++){
+  TEST_ASSERT_EQUAL_HEX('#', *(memory+i));
+}
+  TEST_ASSERT_EQUAL_HEX(NULL, *(memory+21));
   free(memory);
   
 }
@@ -150,64 +113,46 @@ void test_repeatPattern_given_xyZa_6_times_should_have_xyZa_5times_only_in_the_m
   // TEST_ASSERT_EQUAL_PTR(footerPtr, address->footerAddress);
 // }
 
-void test_safeMalloc(){
- //char *memory3=safeMalloc(10);
+void test_safeMalloc_returned_address_has_padding(){
+  char *memory002=safeMalloc(10);
+  char *memory=memory002-HEADER_SIZE,
+       *memory1=memory002+10;
+  int i=0;
+   for(i=0;i<21;i++){
+  TEST_ASSERT_EQUAL_HEX('#', *(memory+i));
+}
+  TEST_ASSERT_EQUAL_HEX(NULL, *(memory+21));
+  for(i=0;i<21;i++){
+  TEST_ASSERT_EQUAL_HEX('#', *(memory1+i));
+}
+  TEST_ASSERT_EQUAL_HEX(NULL, *(memory1+21)); 
+  free(memory002);
 }
 
 void test_allocateAddress_pattern_(){//test padding functionality
   MemoryDescription *address2 = allocateAddress(15);
   char *memory=address2->headerAddress;
-  TEST_ASSERT_EQUAL_HEX('x', *memory);
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+1));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+2));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+3));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+4));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+5));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+6));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+7));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+8));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+9));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+10));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+11));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+12));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+13));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+14));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+15));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory+16));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory+17));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory+18));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory+19));
-  TEST_ASSERT_EQUAL_HEX(NULL, *(memory+20));
-  
+  int i=0;
+  for(i=0;i<21;i++){
+  TEST_ASSERT_EQUAL_HEX('#', *(memory+i));
+}
+  TEST_ASSERT_EQUAL_HEX(NULL, *(memory+21));
+  printf("%s",address2->memoryAddress);
   char *memory1=address2->footerAddress;
-  TEST_ASSERT_EQUAL_HEX('x', *memory1);
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+1));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+2));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+3));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory1+4));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+5));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+6));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+7));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory1+8));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+9));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+10));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+11));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory1+12));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+13));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+14));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+15));
-  TEST_ASSERT_EQUAL_HEX('x', *(memory1+16));
-  TEST_ASSERT_EQUAL_HEX('y', *(memory1+17));
-  TEST_ASSERT_EQUAL_HEX('Z', *(memory1+18));
-  TEST_ASSERT_EQUAL_HEX('a', *(memory1+19));
-  TEST_ASSERT_EQUAL_HEX(NULL, *(memory1+20));
+  for(i=0;i<21;i++){
+  TEST_ASSERT_EQUAL_HEX('#', *(memory1+i));
+}
+  TEST_ASSERT_EQUAL_HEX(NULL, *(memory1+21));
   free(address2);
 } 
 
 
+
+
+
 void test_5th_char_not_same_should_return_5(){
   
-  char pointer[21]="xyZa5yZaxyZaxyZaxyZa";
+  char pointer[21]="####5###############";
   char i=-2;
   i=patternCheck(pointer, 21, CODE_PATTERN);
   
@@ -216,27 +161,11 @@ void test_5th_char_not_same_should_return_5(){
 
 void test_patterncheck_no_problem_return_neg20(){
   
-  char pointer[21]="xyZaxyZaxyZaxyZaxyZa";
+  char pointer[21]="####################";
   char i=-2;
   i=patternCheck(pointer, 21, CODE_PATTERN);
   
   TEST_ASSERT_EQUAL(-20, i);
   }
 
-void test_patterncheck_20xA_no_problem_return_neg20(){
-  
-  char pointer[21]="AAAAAAAAAAAAAAAAAAAA";
-  char i=-2;
-  i=patternCheck(pointer, 21, "A");
-  
-  TEST_ASSERT_EQUAL(-20, i);
-  }
 
-void test_patterncheck_20xA_5th_not_same_return_5(){
-  
-  char pointer[21]="AAAA5AAAAAAAAAAAAAAA";
-  char i=-2;
-  i=patternCheck(pointer, 21, "A");
-  
-  TEST_ASSERT_EQUAL(5, i);
-  }

@@ -9,14 +9,14 @@
 #include "ErrorObject.h"
 #include "Sfree.h"
 
-char *headerPtr, *dataPtr, *footerPtr;
+
 /**
  *  @brief to store the addresses of headerPtr, dataPtr and footerPtr
  *         to MemoryDescription
  */
 MemoryDescription *allocateAddress(int size) {
   MemoryDescription *ptrMemory = malloc(sizeof(MemoryDescription));
-
+  char *headerPtr, *dataPtr, *footerPtr;
   char *space = (char *)malloc(sizeof(HEADER_SIZE+size+FOOTER_SIZE));
 
   headerPtr   = space;
@@ -31,8 +31,8 @@ MemoryDescription *allocateAddress(int size) {
   printf("memory = %p\n", ptrMemory->memoryAddress);
   printf("footer = %p\n", ptrMemory->footerAddress); */
   
-  patternRepeat(5, CODE_PATTERN, headerPtr);//generate pattern for header and footer
-  patternRepeat(5, CODE_PATTERN, footerPtr);
+  patternRepeat(HEADER_SIZE, CODE_PATTERN, headerPtr);//generate pattern for header and footer
+  patternRepeat(FOOTER_SIZE, CODE_PATTERN, footerPtr);
 
   return ptrMemory;
 }
@@ -45,16 +45,11 @@ MemoryDescription *allocateAddress(int size) {
  *  @arg pointer     The destination to point to
  */
 void patternRepeat(int timesToCopy, char *pattern, char *pointer){
-  char *temp;
   int i;
   int slen = strlen(pattern);
   for ( i=0 ; i<(timesToCopy); i++){
-    temp=(pointer+(i*slen));
-   strcpy((temp),pattern);
-    if(((i+2)*slen)>FOOTER_SIZE)//if the pattern will overflow, break from loop
-      break;
+   strcpy((pointer+i),pattern);
   }
- // *temp = '\0';
 }
 
 /**
@@ -104,7 +99,7 @@ void *_safeMalloc(int size, int lineNumber, char *fileName){
   //////////////////// pending
   
   allocAddr = allocateAddress(size);
-  memDesc = createMallocMemDesc(lineNumber, size, fileName, allocAddr);
+  //memDesc = createMallocMemDesc(lineNumber, size, fileName, allocAddr);
  // addToList(memDesc);
   
   

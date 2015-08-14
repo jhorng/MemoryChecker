@@ -5,9 +5,9 @@
 
 #include "MemoryDescription.h"
 // #define DATA_SIZE   100
-#define HEADER_SIZE 21  // ---+
-#define FOOTER_SIZE 21  // -----> HEADER_SIZE AND FOOTER_SIZE MUST BE THE SAME!!
-#define CODE_PATTERN "xyZa"
+#define HEADER_SIZE 21 
+#define FOOTER_SIZE 21  
+#define CODE_PATTERN "#"// limited to one character only
 
 #define PASS_TICKET -20
 

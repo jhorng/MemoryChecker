@@ -4,7 +4,7 @@
 
 
 
-void roamingChecker(MemoryDescription *nomadPtr);
+int roamingChecker(MemoryDescription *nomadPtr);
 void safeSummary();
 
 #endif // safeSummary_H
