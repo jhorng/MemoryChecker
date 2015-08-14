@@ -6,9 +6,6 @@
 #include "LinkedList.h"
 #include "CException.h"
 
-#include "CException.h"
-
-
 void *_safeFree(char *dataAddress, int lineNumber, char *fileName){
   MemoryDescription *freePtr;
   ErrorObject *err; 
@@ -16,7 +13,7 @@ void *_safeFree(char *dataAddress, int lineNumber, char *fileName){
   int iHeader=-1,iFooter=-1;
   Try{
     freePtr=moveBetweenList(dataAddress, fileName, lineNumber);
-  //no error will do below designation
+    // no error, will do below designation
     freePtr->freeLine      =lineNumber;
     freePtr->freeFile      =fileName;
     patternRepeat(freePtr->dataSize, "#", freePtr->memoryAddress);

@@ -12,8 +12,7 @@ void tearDown(void){}
 
 void test_safeFree_NULL(){
   
-  
-  int*memory001;
+  int *memory001;
   memory001=NULL;
  
   safeFree(memory001);

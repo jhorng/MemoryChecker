@@ -2,10 +2,7 @@
 #define LinkedList_H
 #include "ErrorObject.h"
 #include "MemoryDescription.h"
-
 #include "CException.h"
-
-
 
 
 void addToList(MemoryDescription *newMemDesc);

@@ -15,9 +15,12 @@ MemoryDescription *freeTail = NULL;
 
 /**
  *
- *     -------------         --------------------
- *    | Allocation |  --->  | MemoryDescription | ----> .......
- *    -------------         --------------------
+ *      allocationTail ----------------
+ *                                    |
+ *                                   \/
+ *                            --------------------
+ *     allocationHead  --->  | MemoryDescription | 
+ *                           --------------------
  *
  *  @breif link allocation and memory description.
  *         New memoryDescription will be added at the last.
@@ -39,6 +42,11 @@ void addToList(MemoryDescription *newMemDesc){
   return; // To ensure the code to break out.
 }
 
+/**
+ *  @brief searchInAllocPool() will check every lists in a pool
+ *         and return the wanted address which the pointer points at. 
+ *
+ */
 MemoryDescription *searchInAllocPool(char *targetAddress, MemoryDescription **prev){
   MemoryDescription *searchPtr = allocationHead;
   MemoryDescription *tmp = NULL;
@@ -68,14 +76,17 @@ MemoryDescription *searchInAllocPool(char *targetAddress, MemoryDescription **pr
   }
 }
 
+/**
+ *  @brief moveBetweenList() will move the wanted list from 
+ *         allocationPool to freePool.
+ */
 MemoryDescription* moveBetweenList(char *dataAddress, char *fileName, int lineNumber){
   MemoryDescription *deletionPtr = NULL;
   MemoryDescription *prevPtr     = NULL;
 
   deletionPtr = searchInAllocPool(dataAddress, &prevPtr);
   if(deletionPtr == NULL)
-
-    throwError(ERR_FREE_INVALID_LOCATION,"File %s:line %d: No such location to free\n",fileName,lineNumber);
+    throwError(ERR_FREE_INVALID_LOCATION,"File(%s): line[%d]: No such location to free\n",fileName,lineNumber);
   if(freeHead == NULL){ //link to free pool
 		freeHead = deletionPtr;
     freeTail = deletionPtr;
@@ -103,9 +114,20 @@ MemoryDescription* moveBetweenList(char *dataAddress, char *fileName, int lineNu
   return freeTail;
 }
 
-MemoryDescription* passAllocPointer(){
+/**
+ *  @brief  passAllocPointer() is used to return
+ *          the allocationHead pointer which is
+ *          used in other function and file.
+ */
+MemoryDescription *passAllocPointer(){
   return allocationHead;
 }
-MemoryDescription* passFreePointer(){
+
+/**
+ *  @brief  passAllocPointer() is used to return
+ *          the allocationTail pointer which is
+ *          used in other function and file.
+ */
+MemoryDescription *passFreePointer(){
   return freeHead;
 }
